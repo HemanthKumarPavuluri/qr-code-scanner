@@ -1,0 +1,118 @@
+import { TextInput, PasswordInput, Button, Flex, Stack } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useNavigate } from "react-router-dom";
+import { useStore } from "../../store/useStore";
+import { IconUser } from "@tabler/icons-react";
+import "./login.css";
+import { useState } from "react";
+
+function Login() {
+  const navigate = useNavigate();
+  const [openRgisterModal, setOpenRegisterModal] = useState(false);
+
+  const { module, client } = useStore();
+  const form = useForm({
+    mode: "uncontrolled",
+    initialValues: {
+      userId: "",
+      password: "",
+      module,
+      client,
+    },
+
+    validate: {
+      userId: (value) => (value ? null : "Please enter user ID"),
+      password: (value) => (value ? null : "Please enter password"),
+      module: (value) => (value ? null : "Please select a module"),
+      client: (value) => (value ? null : "Please select a client"),
+    },
+  });
+
+  const handleLogin = (values) => {
+    navigate(`/user`);
+  };
+
+  return (
+    <>
+      <form
+        onSubmit={form.onSubmit((values) => {
+          handleLogin(values);
+        })}
+      >
+        <Stack
+          h={"100vh"}
+          px={600}
+          justify={"center"}
+          align={"stretch"}
+          gap={24}
+          p={"10vh 5%"}
+        >
+          <TextInput
+            placeholder="Username"
+            label="Username"
+            withAsterisk={true}
+            size="lg"
+            rightSection={<IconUser />}
+            key={form.key("username")}
+            {...form.getInputProps("username")}
+          />
+          <PasswordInput
+            placeholder="Password"
+            label="Password"
+            size="lg"
+            withAsterisk={true}
+            key={form.key("password")}
+            {...form.getInputProps("password")}
+          />
+          {/* <NumberInput
+            placeholder="#919"
+            label="#919"
+            size="lg"
+            withAsterisk={true}
+            key={form.key("nineOneNine")}
+            {...form.getInputProps("nineOneNine")}
+          />
+          <Select
+            size={"lg"}
+            placeholder="Select Role"
+            withAsterisk={true}
+            label="Role"
+            data={[
+              { value: "admin", label: "Admin" },
+              { value: "professor", label: "Professor" },
+              { value: "student", label: "Student" },
+            ]}
+            key={form.key("module")}
+            {...form.getInputProps("module")}
+            grow
+          /> */}
+          <Flex justify={"space-between"} gap={32}>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setOpenRegisterModal(true)}
+              fullWidth
+            >
+              Register
+            </Button>
+            <Button
+              variant="filled"
+              color="green"
+              size="lg"
+              type="submit"
+              fullWidth
+            >
+              Login
+            </Button>
+          </Flex>
+        </Stack>
+      </form>
+      {/* <Register
+        open={openRgisterModal}
+        setOpen={setOpenRegisterModal}
+      ></Register> */}
+    </>
+  );
+}
+
+export default Login;

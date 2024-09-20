@@ -1,0 +1,10 @@
+.user {
+  .header {
+    background-color: var(--primary);
+    border: none;
+  }
+
+  .mantine-AppShell-navbar {
+    background-color: var(--primary);
+  }
+}

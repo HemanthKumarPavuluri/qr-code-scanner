@@ -1,0 +1,19 @@
+.routes {
+  .mantine-Accordion-content {
+    padding: 0 4px;
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .mantine-Button-label {
+    color: white;
+  }
+
+  .highlight {
+    background-color: var(--secondary);
+    color: black;
+  }
+}

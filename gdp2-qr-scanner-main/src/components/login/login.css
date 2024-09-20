@@ -1,0 +1,14 @@
+.login-page {
+  .mantine-InputWrapper-root {
+    label {
+      color: white;
+      z-index: 1;
+      position: relative;
+    }
+
+    p {
+      z-index: 1;
+      position: relative;
+    }
+  }
+}

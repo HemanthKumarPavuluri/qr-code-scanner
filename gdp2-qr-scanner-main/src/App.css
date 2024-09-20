@@ -1,0 +1,11 @@
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  .mantine-Notification-root {
+    position: fixed;
+    top: 4.5rem;
+    left: 50%;
+  }
+}

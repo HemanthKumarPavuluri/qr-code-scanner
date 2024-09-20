@@ -1,0 +1,19 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  background-color: white;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --primary: #23295a;
+  --secondary: #fcbc14;
+  --gray: #828282;
+  --light-gray: #c4c4c4;
+}
+
+.mantine-Stack-root {
+  padding-inline: 10% !important;
+}
