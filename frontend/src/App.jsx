@@ -13,6 +13,7 @@ import { ToastContextProvider } from "./shared/components";
 import AppContextProvider from "./store/AppContextProvider";
 import User from "./components/user/User";
 import Courses from "./components/courses/Courses";
+import Professors from "./components/professors/Professors";
 
 function App() {
   const theme = createTheme(THEME);
@@ -29,6 +30,7 @@ function App() {
               <Route path="/user" element={<User />}>
                 <Route element={<Courses />} index={true}></Route>
                 <Route path="courses" element={<Courses />} />
+                <Route path="professors" element={<Professors />} />
               </Route>
             </Routes>
           </ToastContextProvider>
