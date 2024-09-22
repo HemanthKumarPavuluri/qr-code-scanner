@@ -34,37 +34,32 @@ function Login() {
 
   return (
     <>
-      <form
-        onSubmit={form.onSubmit((values) => {
-          handleLogin(values);
-        })}
+      <Stack
+        h={"100vh"}
+        px={600}
+        justify={"center"}
+        align={"stretch"}
+        gap={24}
+        p={"10vh 5%"}
       >
-        <Stack
-          h={"100vh"}
-          px={600}
-          justify={"center"}
-          align={"stretch"}
-          gap={24}
-          p={"10vh 5%"}
-        >
-          <TextInput
-            placeholder="Username"
-            label="Username"
-            withAsterisk={true}
-            size="lg"
-            rightSection={<IconUser />}
-            key={form.key("username")}
-            {...form.getInputProps("username")}
-          />
-          <PasswordInput
-            placeholder="Password"
-            label="Password"
-            size="lg"
-            withAsterisk={true}
-            key={form.key("password")}
-            {...form.getInputProps("password")}
-          />
-          {/* <NumberInput
+        <TextInput
+          placeholder="Username"
+          label="Username"
+          withAsterisk={true}
+          size="lg"
+          rightSection={<IconUser />}
+          key={form.key("username")}
+          {...form.getInputProps("username")}
+        />
+        <PasswordInput
+          placeholder="Password"
+          label="Password"
+          size="lg"
+          withAsterisk={true}
+          key={form.key("password")}
+          {...form.getInputProps("password")}
+        />
+        {/* <NumberInput
             placeholder="#919"
             label="#919"
             size="lg"
@@ -86,27 +81,26 @@ function Login() {
             {...form.getInputProps("module")}
             grow
           /> */}
-          <Flex justify={"space-between"} gap={32}>
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => setOpenRegisterModal(true)}
-              fullWidth
-            >
-              Register
-            </Button>
-            <Button
-              variant="filled"
-              color="green"
-              size="lg"
-              type="submit"
-              fullWidth
-            >
-              Login
-            </Button>
-          </Flex>
-        </Stack>
-      </form>
+        <Flex justify={"space-between"} gap={32}>
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => setOpenRegisterModal(true)}
+            fullWidth
+          >
+            Register
+          </Button>
+          <Button
+            variant="filled"
+            color="green"
+            size="lg"
+            onClick={handleLogin}
+            fullWidth
+          >
+            Login
+          </Button>
+        </Flex>
+      </Stack>
       {/* <Register
         open={openRgisterModal}
         setOpen={setOpenRegisterModal}

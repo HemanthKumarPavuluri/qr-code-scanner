@@ -1,22 +1,20 @@
-import {
-  AppShell,
-  Burger,
-  Flex,
-  Text,
-  Card,
-  Image,
-  Button,
-} from "@mantine/core";
-import React, { useState } from "react";
+import { AppShell, Burger, Flex, Text } from "@mantine/core";
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Routes from "../routes/Routes";
+import { useNavigate } from "react-router-dom";
 import "./user.css";
-
-// Import local image
-import professorImage from "./proff.jpg"; // Adjust path if necessary
+import { useStore } from "../../store/useStore";
 
 const User = () => {
   const [closed, setOpened] = useState(false);
+  const navigate = useNavigate();
+  const { setRoute } = useStore();
+
+  useEffect(() => {
+    navigate("/user/courses");
+    setRoute("/user/courses");
+  }, []);
 
   return (
     <AppShell
@@ -51,55 +49,6 @@ const User = () => {
       </AppShell.Navbar>
 
       <AppShell.Main>
-        {/* Two Card components side by side */}
-        <Flex gap="lg" direction="row" align="center" justify="center" mt="xl">
-          <Card
-            shadow="sm"
-            p="lg"
-            radius="md"
-            withBorder
-            style={{ width: "300px" }}
-          >
-            <Card.Section>
-              <Image src={professorImage} height={160} alt="Professor" />
-            </Card.Section>
-            <Text weight={500} size="lg" mt="md">
-              Professor
-            </Text>
-            <Text size="sm" mt="xs">
-              Add, Edit and Remove Professor
-            </Text>
-            <Button fullWidth mt="md" radius="md">
-              Manage Professors
-            </Button>
-          </Card>
-
-          <Card
-            shadow="sm"
-            p="lg"
-            radius="md"
-            withBorder
-            style={{ width: "300px" }}
-          >
-            <Card.Section>
-              <Image
-                src="https://manoa.hawaii.edu/wp/wp-content/uploads/2017/09/student-diversity-02.jpg"
-                height={160}
-                alt="Student"
-              />
-            </Card.Section>
-            <Text weight={500} size="lg" mt="md">
-              Student
-            </Text>
-            <Text size="sm" mt="xs">
-              Add, Edit and Remove Student
-            </Text>
-            <Button fullWidth mt="md" radius="md">
-              Manage Students
-            </Button>
-          </Card>
-        </Flex>
-
         <Outlet />
       </AppShell.Main>
     </AppShell>

@@ -12,6 +12,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContextProvider } from "./shared/components";
 import AppContextProvider from "./store/AppContextProvider";
 import User from "./components/user/User";
+import Courses from "./components/courses/Courses";
 
 function App() {
   const theme = createTheme(THEME);
@@ -25,7 +26,10 @@ function App() {
           <ToastContextProvider>
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/user" element={<User />}></Route>
+              <Route path="/user" element={<User />}>
+                <Route element={<Courses />} index={true}></Route>
+                <Route path="courses" element={<Courses />} />
+              </Route>
             </Routes>
           </ToastContextProvider>
         </QueryClientProvider>
