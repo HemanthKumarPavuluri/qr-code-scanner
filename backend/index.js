@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3001;
 
 // Middleware
 app.use(cors());
@@ -39,6 +39,115 @@ async function run() {
 run().catch(console.dir);
 
 // Professor routes
+app.get("/professors", async (req, res) => {
+  try {
+    // var cursor = db.collection("Professor").find();
+    // var professors = [];
+    // // Execute the each command, triggers for each document
+    // cursor.each(function (err, item) {
+    //   // If the item is null then the cursor is exhausted/empty and closed
+    //   if (item == null) {
+    //     db.close(); // you may not want to close the DB if you have more code....
+    //     return;
+    //   }
+    //   professors.push(item);
+    //   // otherwise, do something with the item
+    // });
+
+    const professors = [
+      {
+        professor_id: "#919",
+        image: "https://example.com/image.jpg",
+        email: "professor.email@example.com",
+        phone: "+1-123-456-7890",
+        office: "Room 204, Science Building",
+        first_name: "John",
+        last_name: "Doe",
+        qualification: "PhD in Computer Science",
+        designation: "Associate Professor",
+        education: [
+          {
+            degree: "PhD",
+            field: "Computer Science",
+            institution: "University of Example",
+            year: 2015,
+          },
+          {
+            degree: "MSc",
+            field: "Information Technology",
+            institution: "Tech University",
+            year: 2010,
+          },
+          {
+            degree: "BSc",
+            field: "Computer Science",
+            institution: "State University",
+            year: 2008,
+          },
+        ],
+        courses_taught: [
+          "Introduction to Algorithms",
+          "Data Structures",
+          "Advanced Machine Learning",
+        ],
+        academic_interests: [
+          "Artificial Intelligence",
+          "Data Science",
+          "Machine Learning",
+          "Natural Language Processing",
+        ],
+      },
+      {
+        professor_id: "#919",
+        image: "https://example.com/image.jpg",
+        email: "professor.email@example.com",
+        phone: "+1-123-456-7890",
+        office: "Room 204, Science Building",
+        first_name: "Mia",
+        last_name: "Khalifa",
+        qualification: "PhD in Computer Science",
+        designation: "Associate Professor",
+        education: [
+          {
+            degree: "PhD",
+            field: "Computer Science",
+            institution: "University of Example",
+            year: 2015,
+          },
+          {
+            degree: "MSc",
+            field: "Information Technology",
+            institution: "Tech University",
+            year: 2010,
+          },
+          {
+            degree: "BSc",
+            field: "Computer Science",
+            institution: "State University",
+            year: 2008,
+          },
+        ],
+        courses_taught: [
+          "Introduction to Algorithms",
+          "Data Structures",
+          "Advanced Machine Learning",
+        ],
+        academic_interests: [
+          "Artificial Intelligence",
+          "Data Science",
+          "Machine Learning",
+          "Natural Language Processing",
+        ],
+      },
+    ];
+
+    res.send(professors);
+  } catch (error) {
+    res.status(500).send({ message: "Error getting professors", error });
+  }
+});
+
+// Professor routes
 app.post("/professors", async (req, res) => {
   try {
     const newProf = req.body;
@@ -48,7 +157,6 @@ app.post("/professors", async (req, res) => {
     res.status(500).send({ message: "Error inserting professor", error });
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

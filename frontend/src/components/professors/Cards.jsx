@@ -1,7 +1,7 @@
 import { Flex, Card, Image, Text, Button } from "@mantine/core";
 import professorImage from "../../assets/proff-2.jpg";
 
-const Cards = ({ professors, handleProfessorClick }) => {
+const Cards = ({ professors = [], handleProfessorClick }) => {
   return (
     <Flex gap="lg" direction="row" align="center" justify="center" mt="xl">
       {professors.map((p) => (
