@@ -25,7 +25,7 @@ const Professors = () => {
         professors={professors}
         handleProfessorClick={handleProfessorClick}
       />
-      <CardDetails data={selectedProfessor} />
+      {selectedProfessor && <CardDetails data={selectedProfessor} />}
     </Flex>
   );
 };
