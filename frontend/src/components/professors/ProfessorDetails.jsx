@@ -1,7 +1,56 @@
-import { Title } from "@mantine/core";
+import { Title, Text, Image, List, Group, Stack } from "@mantine/core";
 
 const CardDetails = ({ data = {} }) => {
-  return <Title>{data.first_name + " " + data.last_name}</Title>;
+  return (
+    <Stack spacing="md">
+      {/* Image */}
+      <Image
+        src={data.image}
+        alt={`${data.first_name} ${data.last_name}`}
+        width={150}
+        height={150}
+        radius="md"
+      />
+
+      {/* Name */}
+      <Title order={1}>{`${data.first_name} ${data.last_name}`}</Title>
+
+      {/* Designation and Qualification */}
+      <Title order={3}>{data.designation}</Title>
+      <Text><strong>Qualification:</strong> {data.qualification}</Text>
+
+      {/* Contact Details */}
+      <Text><strong>Email:</strong> {data.email}</Text>
+      <Text><strong>Phone:</strong> {data.phone}</Text>
+      <Text><strong>Office:</strong> {data.office}</Text>
+
+      {/* Education */}
+      <Title order={3}>Education</Title>
+      <List spacing="sm">
+        {data.education.map((edu, index) => (
+          <List.Item key={index}>
+            {edu.degree} in {edu.field}, {edu.institution} ({edu.year})
+          </List.Item>
+        ))}
+      </List>
+
+      {/* Courses Taught */}
+      <Title order={3}>Courses Taught</Title>
+      <List spacing="sm">
+        {data.courses_taught.map((course, index) => (
+          <List.Item key={index}>{course}</List.Item>
+        ))}
+      </List>
+
+      {/* Academic Interests */}
+      <Title order={3}>Academic Interests</Title>
+      <List spacing="sm">
+        {data.academic_interests.map((interest, index) => (
+          <List.Item key={index}>{interest}</List.Item>
+        ))}
+      </List>
+    </Stack>
+  );
 };
 
 export default CardDetails;
