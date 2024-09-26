@@ -31,6 +31,9 @@ function Login() {
   const handleLogin = (values) => {
     navigate(`/user`);
   };
+  const handleRegister = (values) => {
+    navigate(`/Registerp`);
+  };
 
   return (
     <>
@@ -85,7 +88,7 @@ function Login() {
           <Button
             variant="outline"
             size="lg"
-            onClick={() => setOpenRegisterModal(true)}
+            onClick={handleRegister}
             fullWidth
           >
             Register
