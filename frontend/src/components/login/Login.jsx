@@ -1,4 +1,4 @@
-import { TextInput, PasswordInput, Button, Flex, Stack } from "@mantine/core";
+import { TextInput, PasswordInput, Button, Flex, Stack, Select } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../store/useStore";
@@ -45,6 +45,20 @@ function Login() {
         gap={24}
         p={"10vh 5%"}
       >
+         <Select
+          label="Select Role"
+          placeholder="Pick Role"
+          size="lg"
+          data={[
+            { value: 'admin', label: 'Admin' },
+            { value: 'professor', label: 'Professor' },
+            { value: 'student', label: 'Student' }
+          ]}
+          withAsterisk
+          key={form.key("role")}
+          {...form.getInputProps("role")}
+        />
+
         <TextInput
           placeholder="Username"
           label="Username"
@@ -62,28 +76,7 @@ function Login() {
           key={form.key("password")}
           {...form.getInputProps("password")}
         />
-        {/* <NumberInput
-            placeholder="#919"
-            label="#919"
-            size="lg"
-            withAsterisk={true}
-            key={form.key("nineOneNine")}
-            {...form.getInputProps("nineOneNine")}
-          />
-          <Select
-            size={"lg"}
-            placeholder="Select Role"
-            withAsterisk={true}
-            label="Role"
-            data={[
-              { value: "admin", label: "Admin" },
-              { value: "professor", label: "Professor" },
-              { value: "student", label: "Student" },
-            ]}
-            key={form.key("module")}
-            {...form.getInputProps("module")}
-            grow
-          /> */}
+       
         <Flex justify={"space-between"} gap={32}>
           <Button
             variant="outline"
@@ -104,10 +97,7 @@ function Login() {
           </Button>
         </Flex>
       </Stack>
-      {/* <Register
-        open={openRgisterModal}
-        setOpen={setOpenRegisterModal}
-      ></Register> */}
+      
     </>
   );
 }
