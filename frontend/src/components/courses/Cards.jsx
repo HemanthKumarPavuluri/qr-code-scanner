@@ -1,5 +1,5 @@
 import { Flex, Card, Image, Text, Button } from "@mantine/core";
-import professorImage from "../../assets/proff-2.jpg";
+import professorImage from "../../assets/prof_aziz_fellah.png";
 
 const Cards = () => {
   return (

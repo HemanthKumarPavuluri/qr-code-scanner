@@ -3,7 +3,7 @@ import professorImage from "../../assets/prof_aziz_fellah.png";
 
 const Cards = ({ professors = [], handleProfessorClick }) => {
   return (
-    <Flex gap="lg" direction="row" align="center" justify="center" mt="xl">
+    <Flex gap="lg" wrap="wrap" justify="center" mt="xl">
       {professors.map((p) => (
         <Card
           key={p.professor_id}
@@ -11,7 +11,7 @@ const Cards = ({ professors = [], handleProfessorClick }) => {
           p="lg"
           radius="md"
           withBorder
-          style={{ width: "300px" }}
+          style={{ width: "250px", cursor: "pointer" }}
           onClick={() => handleProfessorClick(p)}
         >
           <Card.Section>
