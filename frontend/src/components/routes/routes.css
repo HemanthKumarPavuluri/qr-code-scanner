@@ -14,6 +14,9 @@
 
   .highlight {
     background-color: var(--secondary);
-    color: black;
+
+    .mantine-Button-label {
+      color: black;
+    }
   }
 }

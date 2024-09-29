@@ -12,8 +12,8 @@ const User = () => {
   const { setRoute } = useStore();
 
   useEffect(() => {
-    navigate("/user/courses");
-    setRoute("/user/courses");
+    navigate("/user/professors");
+    setRoute("/user/professors");
   }, []);
 
   return (

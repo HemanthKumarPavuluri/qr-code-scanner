@@ -3,7 +3,7 @@ import professorImage from "../../assets/prof_aziz_fellah.png";
 
 const Cards = ({ professors = [], handleProfessorClick }) => {
   return (
-    <Flex gap="lg" wrap="wrap" justify="center" mt="xl">
+    <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl">
       {professors.map((p) => (
         <Card
           key={p.professor_id}

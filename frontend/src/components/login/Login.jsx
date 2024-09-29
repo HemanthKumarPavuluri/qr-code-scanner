@@ -40,7 +40,7 @@ function Login() {
         justify={"center"}
         align={"stretch"}
         gap={24}
-        p={"10vh 5%"}
+        p={"10v 5%"}
       >
         <TextInput
           placeholder="Username"

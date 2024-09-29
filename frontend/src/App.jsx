@@ -28,9 +28,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/user" element={<User />}>
-                <Route element={<Courses />} index={true}></Route>
-                <Route path="courses" element={<Courses />} />
+                <Route element={<Professors />} index={true}></Route>
                 <Route path="professors" element={<Professors />} />
+                <Route path="courses" element={<Courses />} />
               </Route>
             </Routes>
           </ToastContextProvider>

@@ -4,12 +4,12 @@ const DOMAIN = "http://13.235.98.215:8001";
 
 const ROUTES = [
   {
-    label: "Courses",
-    name: "courses",
-  },
-  {
     label: "Professors",
     name: "professors",
+  },
+  {
+    label: "Courses",
+    name: "courses",
   },
 ];
 

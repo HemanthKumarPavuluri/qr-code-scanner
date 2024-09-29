@@ -1,4 +1,4 @@
-import { Button, Stack } from "@mantine/core";
+import { Button, Box } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import "./routes.css";
 import { ROUTES } from "../../shared/constants";
@@ -15,7 +15,7 @@ const Routes = () => {
 
   const items = ROUTES.map((child) => (
     <>
-      <Stack p={8} gap={4} className="routes">
+      <Box className="routes" py={4}>
         <Button
           className={`/user/${child.name}` == selectedRoute ? "highlight" : ""}
           fullWidth
@@ -26,7 +26,7 @@ const Routes = () => {
         >
           {child.label}
         </Button>
-      </Stack>
+      </Box>
     </>
   ));
 

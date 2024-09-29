@@ -1,6 +1,6 @@
 import Cards from "./Cards";
 import CardDetails from "./ProfessorDetails";
-import { Flex, Stack } from "@mantine/core";
+import { Flex, Box, ScrollArea, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { fetchProfessors } from "../../api/index";
 
@@ -33,31 +33,28 @@ const Professors = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <Flex
-      justify="space-between"
-      align="flex-start"
-      gap="xl"
-      wrap="wrap"
-      mt="xl"
-      px="xl"
-    >
-      {/* Cards Section */}
-      <Stack spacing="xl" sx={{ flex: 1 }}>
-        <Cards
-          professors={professors}
-          handleProfessorClick={handleProfessorClick}
-        />
-      </Stack>
+    <Box>
+      <Title order={2}>Professors</Title>
+      <Title order={5}>Select a professor to view details</Title>
+      <Flex justify="center" gap={80} py={32}>
+        {/* Cards Section */}
+        <ScrollArea h={"800"} w="40%" type="never">
+          <Cards
+            professors={professors}
+            handleProfessorClick={handleProfessorClick}
+          />
+        </ScrollArea>
 
-      {/* Details Section */}
-      <Stack spacing="xl" sx={{ flex: 2, minWidth: "300px" }}>
-        {selectedProfessor ? (
-          <CardDetails data={selectedProfessor} />
-        ) : (
-          <p>Select a professor to view details</p>
-        )}
-      </Stack>
-    </Flex>
+        {/* Details Section */}
+        <ScrollArea h={"800"} w="40%" type="never">
+          {selectedProfessor ? (
+            <CardDetails data={selectedProfessor} />
+          ) : (
+            <p>Select a professor to view details</p>
+          )}
+        </ScrollArea>
+      </Flex>
+    </Box>
   );
 };
 
