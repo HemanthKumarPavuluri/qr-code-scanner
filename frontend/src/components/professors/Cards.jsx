@@ -14,6 +14,7 @@ const Cards = ({
   professors = [],
   handleProfessorClick,
   selectedProfessor,
+  openEditForm, // New prop to open the form with pre-filled details
 }) => {
   return (
     <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl">
@@ -41,18 +42,29 @@ const Cards = ({
           <Text size="sm" mt="xs">
             {p.email}
           </Text>
-          {selectedProfessor.professor_id === p.professor_id && (
+
+          {selectedProfessor?.professor_id === p.professor_id && (
             <Flex justify={"flex-end"} pt={16} gap={20}>
-              <ActionIcon variant="subtle">
+              {/* Edit Button */}
+              <ActionIcon
+                variant="subtle"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent the card click event
+                  openEditForm(p); // Open the form with professor data
+                }}
+              >
                 <IconPencil />
               </ActionIcon>
-              <ActionIcon variant="subtle" c={"red"}>
+
+              {/* Delete Button */}
+              <ActionIcon variant="subtle" color={"red"}>
                 <IconTrashXFilled />
               </ActionIcon>
             </Flex>
           )}
-          {selectedProfessor.professor_id !== p.professor_id && (
-            <Box h={45}></Box>
+
+          {selectedProfessor?.professor_id !== p.professor_id && (
+            <Box h={45}></Box> // Placeholder for spacing
           )}
         </Card>
       ))}

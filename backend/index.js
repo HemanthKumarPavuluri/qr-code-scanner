@@ -54,6 +54,29 @@ app.post("/professors", async (req, res) => {
   }
 });
 
+// update professor
+
+app.put("/professors/:id", async (req, res) => {
+  try {
+    const profId = req.params.id;
+    const updatedProf = req.body;
+
+    // Update professor based on _id
+    const result = await profCollection.updateOne(
+      { _id: new MongoClient.ObjectId(profId) },
+      { $set: updatedProf }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).send({ message: "Professor not found" });
+    }
+
+    res.send({ message: "Professor updated successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Error updating professor", error });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

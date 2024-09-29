@@ -1,7 +1,8 @@
+import { useState, useEffect } from "react";
+import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
 import Cards from "./Cards";
 import CardDetails from "./ProfessorDetails";
-import { Flex, Box, ScrollArea, Title, Button } from "@mantine/core";
-import { useEffect, useState } from "react";
+import ProfessorForm from "./ProfessorForm"; // Import the form
 import { fetchProfessors } from "../../api/index";
 
 const Professors = () => {
@@ -9,6 +10,8 @@ const Professors = () => {
   const [selectedProfessor, setSelectedProfessor] = useState(undefined);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [formOpen, setFormOpen] = useState(false); // State for modal open/close
+  const [formProfessor, setFormProfessor] = useState(null); // State for prefilled professor
 
   useEffect(() => {
     fetchProfessors()
@@ -29,6 +32,12 @@ const Professors = () => {
     setSelectedProfessor(professor);
   };
 
+  // Function to open the form with prefilled details for editing
+  const openEditForm = (professor) => {
+    setFormOpen(true);
+    setFormProfessor(professor); // Prefill form with selected professor data
+  };
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -39,7 +48,7 @@ const Professors = () => {
           <Title order={2}>Professors</Title>
           <Title order={5}>Select a professor to view details</Title>
         </Box>
-        <Button size="lg" m={16}>
+        <Button size="lg" m={16} onClick={() => setFormOpen(true)}>
           Add Professor
         </Button>
       </Flex>
@@ -50,6 +59,7 @@ const Professors = () => {
             professors={professors}
             selectedProfessor={selectedProfessor}
             handleProfessorClick={handleProfessorClick}
+            openEditForm={openEditForm} // Pass openEditForm to Cards
           />
         </ScrollArea>
 
@@ -62,6 +72,15 @@ const Professors = () => {
           )}
         </ScrollArea>
       </Flex>
+
+      {/* Modal for adding/editing a professor */}
+      <Modal
+        opened={formOpen}
+        onClose={() => setFormOpen(false)}
+        title={formProfessor ? "Edit Professor" : "Add Professor"}
+      >
+        <ProfessorForm professor={formProfessor} />
+      </Modal>
     </Box>
   );
 };

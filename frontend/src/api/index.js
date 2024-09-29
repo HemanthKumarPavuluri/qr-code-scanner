@@ -1,3 +1,3 @@
 import fetchProfessors from "./fetchProfessors";
-
-export { fetchProfessors };
+import updateProfessor from "./updateProfessor";
+export { fetchProfessors, updateProfessor };
