@@ -1,10 +1,9 @@
-import { Title, Text, Image, List, Group, Stack } from "@mantine/core";
+import { Title, Text, List, Stack } from "@mantine/core";
 
 const CardDetails = ({ data = {} }) => {
   return (
     <Stack spacing="md">
       <Title order={1}>{`${data.first_name} ${data.last_name}`}</Title>
-
       <Title order={3}>{data.designation}</Title>
       <Text>
         <strong>Qualification:</strong> {data.qualification}

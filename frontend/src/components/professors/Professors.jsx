@@ -1,6 +1,6 @@
 import Cards from "./Cards";
 import CardDetails from "./ProfessorDetails";
-import { Flex, Box, ScrollArea, Title } from "@mantine/core";
+import { Flex, Box, ScrollArea, Title, Button } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { fetchProfessors } from "../../api/index";
 
@@ -34,13 +34,21 @@ const Professors = () => {
 
   return (
     <Box>
-      <Title order={2}>Professors</Title>
-      <Title order={5}>Select a professor to view details</Title>
+      <Flex justify={"space-between"}>
+        <Box>
+          <Title order={2}>Professors</Title>
+          <Title order={5}>Select a professor to view details</Title>
+        </Box>
+        <Button size="lg" m={16}>
+          Add Professor
+        </Button>
+      </Flex>
       <Flex justify="center" gap={80} py={32}>
         {/* Cards Section */}
         <ScrollArea h={"800"} w="40%" type="never">
           <Cards
             professors={professors}
+            selectedProfessor={selectedProfessor}
             handleProfessorClick={handleProfessorClick}
           />
         </ScrollArea>
