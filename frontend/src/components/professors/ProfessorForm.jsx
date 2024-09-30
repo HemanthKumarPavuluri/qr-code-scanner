@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
 import { TextInput, Button, Box, Title, Flex } from "@mantine/core";
-import { addProfessor } from "../../api"; // Import the addProfessor function
+import { addProfessor, fetchProfessors } from "../../api"; // Import the addProfessor function
 import { updateProfessor } from "../../api";
 import { showNotification } from "@mantine/notifications";
 
-const ProfessorForm = ({ professor, onSave, onCancel }) => {
+const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [professorId, setProfessorId] = useState("");
   const [office, setOffice] = useState("");
   const [qualification, setQualification] = useState("");
   const [designation, setDesignation] = useState("");
@@ -63,10 +62,11 @@ const ProfessorForm = ({ professor, onSave, onCancel }) => {
   const handleAddProfessor = async (newProfessor) => {
     try {
       const addedProfessor = await addProfessor(newProfessor);
+      fetchProfessors().then((res) => {
+        setProfessors(res);
+        setFormOpen(false);
+      });
       console.log("New Professor added:", addedProfessor);
-      if (onSave && typeof onSave === "function") {
-        onSave(addedProfessor);
-      }
     } catch (error) {
       console.error("Error adding professor:", error);
       showNotification({
@@ -79,11 +79,11 @@ const ProfessorForm = ({ professor, onSave, onCancel }) => {
 
   const handleUpdateProfessor = async (updatedProfessor) => {
     try {
-      const updatedData = await updateProfessor(updatedProfessor);
-      console.log("Professor updated:", updatedData);
-      if (onSave && typeof onSave === "function") {
-        onSave(updatedData);
-      }
+      await updateProfessor(updatedProfessor);
+      fetchProfessors().then((res) => {
+        setProfessors(res);
+        setFormOpen(false);
+      });
     } catch (error) {
       console.error("Error updating professor:", error);
       showNotification({
@@ -164,12 +164,6 @@ const ProfessorForm = ({ professor, onSave, onCancel }) => {
             label="Phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            required
-          />
-          <TextInput
-            label="Professor Id"
-            value={professorId}
-            onChange={(e) => setProfessorId(e.target.value)}
             required
           />
           <TextInput
