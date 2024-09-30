@@ -1,6 +1,9 @@
 const express = require("express");
-const app = express();
+const { MongoClient, ServerApiVersion } = require("mongodb");
 const cors = require("cors");
+require("dotenv").config({ path: "./config.env" });
+
+const app = express();
 const port = process.env.PORT || 3001;
 
 // Middleware
@@ -8,9 +11,6 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB Connection
-const { MongoClient, ServerApiVersion } = require("mongodb");
-require("dotenv").config({ path: "./config.env" });
-
 const client = new MongoClient(process.env.ATLAS_URI, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -38,24 +38,28 @@ async function run() {
 
 run().catch(console.dir);
 
+// Route to get all professors
 app.get("/professors", async (req, res) => {
-  let results = await profCollection.find({}).toArray();
-  res.send(results).status(200);
+  try {
+    const results = await profCollection.find({}).toArray();
+    res.status(200).send(results);
+  } catch (error) {
+    res.status(500).send({ message: "Error fetching professors", error });
+  }
 });
 
-// Professor routes
+// Route to add a new professor
 app.post("/professors", async (req, res) => {
   try {
-    const newProf = req.body;
-    const result = await profCollection.insertOne(newProf);
-    res.send(result);
+    const newProf = req.body; // Get data from request body
+    const result = await profCollection.insertOne(newProf); // Insert new professor into the collection
+    res.status(201).send(result); // Respond with the inserted document
   } catch (error) {
     res.status(500).send({ message: "Error inserting professor", error });
   }
 });
 
-// update professor
-
+// Route to update an existing professor
 app.put("/professors/:id", async (req, res) => {
   try {
     const profId = req.params.id;
@@ -77,6 +81,7 @@ app.put("/professors/:id", async (req, res) => {
   }
 });
 
+// Start the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

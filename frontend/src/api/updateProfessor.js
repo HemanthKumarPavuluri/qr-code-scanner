@@ -1,13 +1,21 @@
-import axios from "axios";
+const updateProfessor = async (professorData) => {
+  if (!professorData.id) {
+    throw new Error("Professor ID is required to update.");
+  }
 
-const updateProfessor = async (id, updatedData) => {
-  const res = await axios({
-    url: `http://localhost:3001/professors/${id}`,
+  const response = await fetch(`/api/professors/${professorData.id}`, {
     method: "PUT",
-    data: updatedData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(professorData),
   });
 
-  return res.data;
+  if (!response.ok) {
+    throw new Error("Failed to update professor");
+  }
+
+  return await response.json();
 };
 
-export default updateProfessor;
+export default updateProfessor; // Make sure to export as default

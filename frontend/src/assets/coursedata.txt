@@ -5,7 +5,9 @@
   "degree_levels_available": [
     "Undergraduate",
     "Graduate"
-  ]
+  ],
+  "professor_assigned": "Dr. John Smith",
+  "section_number": "001"
 },
 {
   "course_name": "Operating Systems",
@@ -14,7 +16,9 @@
   "degree_levels_available": [
     "Undergraduate",
     "Graduate"
-  ]
+  ],
+  "professor_assigned": "Dr. Emily Johnson",
+  "section_number": "002"
 },
 {
   "course_name": "Database Management Systems",
@@ -23,7 +27,9 @@
   "degree_levels_available": [
     "Undergraduate",
     "Graduate"
-  ]
+  ],
+  "professor_assigned": "Dr. Michael Williams",
+  "section_number": "003"
 },
 {
   "course_name": "Computer Networks",
@@ -32,7 +38,9 @@
   "degree_levels_available": [
     "Undergraduate",
     "Graduate"
-  ]
+  ],
+  "professor_assigned": "Dr. Sarah Brown",
+  "section_number": "004"
 },
 {
   "course_name": "Artificial Intelligence",
@@ -41,7 +49,9 @@
   "degree_levels_available": [
     "Undergraduate",
     "Graduate"
-  ]
+  ],
+  "professor_assigned": "Dr. David Jones",
+  "section_number": "005"
 },
 {
   "course_name": "Software Engineering",
@@ -50,6 +60,7 @@
   "degree_levels_available": [
     "Undergraduate",
     "Graduate"
-  ]
+  ],
+  "professor_assigned": "Dr. Jessica Taylor",
+  "section_number": "006"
 }
-
