@@ -9,6 +9,7 @@ const ProfessorForm = ({ professor, onSave, onCancel }) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [professorId, setProfessorId] = useState("");
   const [office, setOffice] = useState("");
   const [qualification, setQualification] = useState("");
   const [designation, setDesignation] = useState("");
@@ -25,14 +26,13 @@ const ProfessorForm = ({ professor, onSave, onCancel }) => {
       setOffice(professor.office || "");
       setQualification(professor.qualification || "");
       setDesignation(professor.designation || "");
-      const professorId = professor.id || "";
       // Convert the array of education objects to a comma-separated string
       setEducation(
         professor.education
           ? professor.education
               .map(
                 (item) =>
-                  `${item.degree} in ${item.field} from ${item.institution} (${item.year.$numberInt})`
+                  `${item.degree} in ${item.field} from ${item.institution} (${item.year})`
               )
               .join(", ")
           : ""
@@ -117,7 +117,7 @@ const ProfessorForm = ({ professor, onSave, onCancel }) => {
           field: parts[1]?.trim().split("(")[0]?.trim() || "",
           institution:
             parts[1]?.trim().split("(")[1]?.replace(")", "").trim() || "",
-          year: { $numberInt: year },
+          year,
         };
       }),
       courses_taught: coursesTaught.split(",").map((item) => item.trim()),
@@ -127,9 +127,9 @@ const ProfessorForm = ({ professor, onSave, onCancel }) => {
     };
 
     console.log("Professor ID for update:", professor ? professor.id : "None");
-    if (professor && professor.professor_id) {
+    if (professor && professor._id) {
       // Adjusted to check the right ID
-      handleUpdateProfessor({ id: professor.professor_id, ...professorData });
+      handleUpdateProfessor({ ...professor, ...professorData });
     } else {
       handleAddProfessor(professorData);
     }
@@ -164,6 +164,12 @@ const ProfessorForm = ({ professor, onSave, onCancel }) => {
             label="Phone"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
+            required
+          />
+          <TextInput
+            label="Professor Id"
+            value={professorId}
+            onChange={(e) => setProfessorId(e.target.value)}
             required
           />
           <TextInput

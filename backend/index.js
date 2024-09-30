@@ -1,5 +1,5 @@
 const express = require("express");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const cors = require("cors");
 require("dotenv").config({ path: "./config.env" });
 
@@ -65,9 +65,11 @@ app.put("/professors/:id", async (req, res) => {
     const profId = req.params.id;
     const updatedProf = req.body;
 
+    delete updatedProf._id;
+
     // Update professor based on _id
     const result = await profCollection.updateOne(
-      { _id: new MongoClient.ObjectId(profId) },
+      { _id: new ObjectId(profId) },
       { $set: updatedProf }
     );
 
@@ -78,6 +80,20 @@ app.put("/professors/:id", async (req, res) => {
     res.send({ message: "Professor updated successfully" });
   } catch (error) {
     res.status(500).send({ message: "Error updating professor", error });
+  }
+});
+
+app.delete("/professors/:id", async (req, res) => {
+  try {
+    const profId = req.params.id;
+
+    const result = await profCollection.deleteOne({
+      _id: new ObjectId(profId),
+    });
+
+    res.send({ message: "Successfully deleted the professor" });
+  } catch (error) {
+    res.status(500).send({ message: "Error deleting professor", error });
   }
 });
 
