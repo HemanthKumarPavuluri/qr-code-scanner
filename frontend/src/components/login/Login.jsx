@@ -1,4 +1,4 @@
-import { TextInput, PasswordInput, Button, Flex, Stack } from "@mantine/core";
+import { TextInput, PasswordInput, Button, Flex, Stack, Select } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../store/useStore";
@@ -28,6 +28,9 @@ function Login() {
     },
   });
 
+  const handleregister = (values) => {
+    navigate(`/register`);
+  };
   const handleLogin = (values) => {
     navigate(`/user`);
   };
@@ -42,6 +45,19 @@ function Login() {
         gap={24}
         p={"10v 5%"}
       >
+        <Select
+          label="Select Role"
+          placeholder="Pick Role"
+          size="lg"
+          data={[
+            { value: 'admin', label: 'Admin' },
+            { value: 'professor', label: 'Professor' },
+            { value: 'student', label: 'Student' }
+          ]}
+          withAsterisk
+          key={form.key("role")}
+          {...form.getInputProps("role")}
+        />
         <TextInput
           placeholder="Username"
           label="Username"
@@ -85,7 +101,7 @@ function Login() {
           <Button
             variant="outline"
             size="lg"
-            onClick={() => setOpenRegisterModal(true)}
+            onClick={handleregister}
             fullWidth
           >
             Register
