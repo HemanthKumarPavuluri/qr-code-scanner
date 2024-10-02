@@ -6,9 +6,12 @@ import { IconUser } from "@tabler/icons-react";
 import "./login.css";
 import { useState } from "react";
 
+
+
 function Login() {
   const navigate = useNavigate();
   const [openRgisterModal, setOpenRegisterModal] = useState(false);
+  const [role, setRole] = useState('');
 
   const { module, client } = useStore();
   const form = useForm({
@@ -26,14 +29,35 @@ function Login() {
       module: (value) => (value ? null : "Please select a module"),
       client: (value) => (value ? null : "Please select a client"),
     },
+    
   });
 
+<<<<<<< Updated upstream
   const handleLogin = (values) => {
     navigate(`/user`);
   };
   const handleRegister = (values) => {
     navigate(`/Registerp`);
   };
+=======
+  const handleLogin = () => {
+    
+    if (role === 'admin') {
+      navigate('/user');       // Redirect to admin page
+    } else if (role === 'professor') {
+      navigate('/professor');  // Redirect to professor page
+    } else if (role === 'student') {
+      navigate('/student');    // Redirect to student page
+    }
+  };
+  
+  const handleregister = (values) => {
+    navigate(`/register`);
+  };
+  // const handleLogin = (values) => {
+  //   navigate(`/user`);
+  // };
+>>>>>>> Stashed changes
 
   return (
     <>
@@ -45,6 +69,7 @@ function Login() {
         gap={24}
         p={"10vh 5%"}
       >
+<<<<<<< Updated upstream
          <Select
           label="Select Role"
           placeholder="Pick Role"
@@ -59,6 +84,20 @@ function Login() {
           {...form.getInputProps("role")}
         />
 
+=======
+        <Select
+        label="Select Role"
+        placeholder="Pick Role"
+        size="lg"
+        data={[
+          { value: 'admin', label: 'Admin' },
+          { value: 'professor', label: 'Professor' },
+          { value: 'student', label: 'Student' },
+        ]}
+        value={role}
+        onChange={(selectedRole) => setRole(selectedRole)}  // Update role state
+      />
+>>>>>>> Stashed changes
         <TextInput
           placeholder="Username"
           label="Username"
@@ -76,7 +115,11 @@ function Login() {
           key={form.key("password")}
           {...form.getInputProps("password")}
         />
+<<<<<<< Updated upstream
        
+=======
+        
+>>>>>>> Stashed changes
         <Flex justify={"space-between"} gap={32}>
           <Button
             variant="outline"
