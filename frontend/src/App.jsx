@@ -14,7 +14,6 @@ import AppContextProvider from "./store/AppContextProvider";
 import User from "./components/user/User";
 import Courses from "./components/courses/Courses";
 import Professors from "./components/professors/Professors";
-import Register from "./components/register/register";
 
 function App() {
   const theme = createTheme(THEME);
@@ -28,7 +27,6 @@ function App() {
           <ToastContextProvider>
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/register" element={<Register />}></Route>
               <Route path="/user" element={<User />}>
                 <Route element={<Professors />} index={true}></Route>
                 <Route path="professors" element={<Professors />} />
