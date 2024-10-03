@@ -6,7 +6,6 @@ import profAzizImage from "../../assets/prof_aziz_fellah.png";
 import profAjayImage from "../../assets/prof_ajay_bandi.png";
 import profCindyImage from "../../assets/prof_cindytu.png";
 import profRatanImage from "../../assets/prof_ratan_lal.png";
-import { deleteProfessor } from "../../api";
 
 // Mapping professor names/IDs to their respective images
 const imageMapping = {
@@ -20,13 +19,9 @@ const Cards = ({
   professors = [],
   handleProfessorClick,
   selectedProfessor,
+  handleDelete,
   openEditForm, // New prop to open the form with pre-filled details
 }) => {
-  const handleDelete = (e, id) => {
-    e.stopPropagation();
-    deleteProfessor(id);
-  };
-
   return (
     <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl">
       {professors.map((p) => (
