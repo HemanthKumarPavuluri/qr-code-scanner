@@ -21,4 +21,4 @@ const updateProfessor = async (professorData) => {
   return await response.json();
 };
 
-export default updateProfessor; // Make sure to export as default
+export default updateProfessor;

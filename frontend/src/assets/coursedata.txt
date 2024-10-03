@@ -1,66 +1,158 @@
-{
-  "course_name": "Data Structures",
-  "description": "This course covers fundamental data structures such as arrays, linked lists, stacks, queues, trees, and graphs, with an emphasis on their applications and efficiency.",
-  "crn": "23456",
-  "degree_levels_available": [
-    "Undergraduate",
-    "Graduate"
-  ],
-  "professor_assigned": "Dr. John Smith",
-  "section_number": "001"
-},
-{
-  "course_name": "Operating Systems",
-  "description": "This course explores the principles of operating systems, including process management, memory management, file systems, and concurrency.",
-  "crn": "34567",
-  "degree_levels_available": [
-    "Undergraduate",
-    "Graduate"
-  ],
-  "professor_assigned": "Dr. Emily Johnson",
-  "section_number": "002"
-},
-{
-  "course_name": "Database Management Systems",
-  "description": "An introduction to database design, SQL, and transaction management, with a focus on relational databases and normalization techniques.",
-  "crn": "45678",
-  "degree_levels_available": [
-    "Undergraduate",
-    "Graduate"
-  ],
-  "professor_assigned": "Dr. Michael Williams",
-  "section_number": "003"
-},
-{
-  "course_name": "Computer Networks",
-  "description": "This course provides an in-depth study of computer networks, including network architectures, protocols, and the Internet.",
-  "crn": "56789",
-  "degree_levels_available": [
-    "Undergraduate",
-    "Graduate"
-  ],
-  "professor_assigned": "Dr. Sarah Brown",
-  "section_number": "004"
-},
-{
-  "course_name": "Artificial Intelligence",
-  "description": "An introduction to artificial intelligence techniques, including machine learning, search algorithms, and neural networks.",
-  "crn": "67890",
-  "degree_levels_available": [
-    "Undergraduate",
-    "Graduate"
-  ],
-  "professor_assigned": "Dr. David Jones",
-  "section_number": "005"
-},
-{
-  "course_name": "Software Engineering",
-  "description": "This course focuses on software development methodologies, project management, version control, and quality assurance practices.",
-  "crn": "78901",
-  "degree_levels_available": [
-    "Undergraduate",
-    "Graduate"
-  ],
-  "professor_assigned": "Dr. Jessica Taylor",
-  "section_number": "006"
-}
+[
+  {
+    "course_name": "Data Structures",
+    "description": "This course covers fundamental data structures such as arrays, linked lists, stacks, queues, trees, and graphs, with an emphasis on their applications and efficiency.",
+    "crn": "23456",
+    "degree_levels_available": [
+      "Undergraduate",
+      "Graduate"
+    ],
+    "sections": [
+      {
+        "section_number": "001",
+        "professor_assigned": "Dr. Aziz Fellah",
+        "level": "Undergraduate"
+      },
+      {
+        "section_number": "002",
+        "professor_assigned": "Dr. Ajay Bandi",
+        "level": "Graduate"
+      },
+      {
+        "section_number": "003",
+        "professor_assigned": "Dr. Ratan Lal",
+        "level": "Undergraduate"
+      }
+    ]
+  },
+  {
+    "course_name": "Operating Systems",
+    "description": "This course explores the principles of operating systems, including process management, memory management, file systems, and concurrency.",
+    "crn": "34567",
+    "degree_levels_available": [
+      "Undergraduate",
+      "Graduate"
+    ],
+    "sections": [
+      {
+        "section_number": "001",
+        "professor_assigned": "Dr. Cindy Zhilling Tu",
+        "level": "Undergraduate"
+      },
+      {
+        "section_number": "002",
+        "professor_assigned": "Dr. Chandra Mouli",
+        "level": "Graduate"
+      },
+      {
+        "section_number": "003",
+        "professor_assigned": "Dr. Jony Adkins",
+        "level": "Undergraduate"
+      }
+    ]
+  },
+  {
+    "course_name": "Database Management Systems",
+    "description": "An introduction to database design, SQL, and transaction management, with a focus on relational databases and normalization techniques.",
+    "crn": "45678",
+    "degree_levels_available": [
+      "Undergraduate",
+      "Graduate"
+    ],
+    "sections": [
+      {
+        "section_number": "001",
+        "professor_assigned": "Dr. Aziz Fellah",
+        "level": "Undergraduate"
+      },
+      {
+        "section_number": "002",
+        "professor_assigned": "Dr. Ajay Bandi",
+        "level": "Graduate"
+      },
+      {
+        "section_number": "003",
+        "professor_assigned": "Dr. Ratan Lal",
+        "level": "Undergraduate"
+      }
+    ]
+  },
+  {
+    "course_name": "Computer Networks",
+    "description": "This course provides an in-depth study of computer networks, including network architectures, protocols, and the Internet.",
+    "crn": "56789",
+    "degree_levels_available": [
+      "Undergraduate",
+      "Graduate"
+    ],
+    "sections": [
+      {
+        "section_number": "001",
+        "professor_assigned": "Dr. Cindy Zhilling Tu",
+        "level": "Undergraduate"
+      },
+      {
+        "section_number": "002",
+        "professor_assigned": "Dr. Chandra Mouli",
+        "level": "Graduate"
+      },
+      {
+        "section_number": "003",
+        "professor_assigned": "Dr. Jony Adkins",
+        "level": "Undergraduate"
+      }
+    ]
+  },
+  {
+    "course_name": "Artificial Intelligence",
+    "description": "An introduction to artificial intelligence techniques, including machine learning, search algorithms, and neural networks.",
+    "crn": "67890",
+    "degree_levels_available": [
+      "Undergraduate",
+      "Graduate"
+    ],
+    "sections": [
+      {
+        "section_number": "001",
+        "professor_assigned": "Dr. Aziz Fellah",
+        "level": "Undergraduate"
+      },
+      {
+        "section_number": "002",
+        "professor_assigned": "Dr. Ajay Bandi",
+        "level": "Graduate"
+      },
+      {
+        "section_number": "003",
+        "professor_assigned": "Dr. Ratan Lal",
+        "level": "Undergraduate"
+      }
+    ]
+  },
+  {
+    "course_name": "Software Engineering",
+    "description": "This course focuses on software development methodologies, project management, version control, and quality assurance practices.",
+    "crn": "78901",
+    "degree_levels_available": [
+      "Undergraduate",
+      "Graduate"
+    ],
+    "sections": [
+      {
+        "section_number": "001",
+        "professor_assigned": "Dr. Cindy Zhilling Tu",
+        "level": "Undergraduate"
+      },
+      {
+        "section_number": "002",
+        "professor_assigned": "Dr. Chandra Mouli",
+        "level": "Graduate"
+      },
+      {
+        "section_number": "003",
+        "professor_assigned": "Dr. Jony Adkins",
+        "level": "Undergraduate"
+      }
+    ]
+  }
+]
