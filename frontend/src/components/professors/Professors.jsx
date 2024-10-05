@@ -3,7 +3,7 @@ import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
 import Cards from "./Cards";
 import CardDetails from "./ProfessorDetails";
 import ProfessorForm from "./ProfessorForm"; // Import the form
-import { fetchProfessors, deleteProfessor } from "../../api/index";
+import { fetchProfessors, deleteProfessor } from "../../api/professorApi/index";
 
 const Professors = () => {
   const [professors, setProfessors] = useState([]);

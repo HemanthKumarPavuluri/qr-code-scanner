@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { TextInput, Button, Box, Title, Flex } from "@mantine/core";
-import { addProfessor, fetchProfessors } from "../../api"; // Import the addProfessor function
-import { updateProfessor } from "../../api";
+import { addProfessor, fetchProfessors,updateProfessor } from "../../api/professorApi"; // Import the addProfessor function
+
 import { showNotification } from "@mantine/notifications";
 
 const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
