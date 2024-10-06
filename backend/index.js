@@ -29,6 +29,7 @@ async function run() {
     // Creating a database and collections
     const database = client.db("qrcode");
     profCollection = database.collection("Professor");
+    courseCollection = database.collection("courses");
 
     console.log("Pinged the deployment and connected to database successfully");
   } catch (error) {
@@ -100,21 +101,6 @@ app.delete("/professors/:id", async (req, res) => {
 // courses Routes start here
 
 let courseCollection; // Define collection variable for courses
-
-async function run() {
-  try {
-    // Connect the client to the server
-    await client.connect();
-
-    // Creating a database and collections
-    const database = client.db("qrcode");
-    courseCollection = database.collection("courses"); // Adding the Course collection
-
-    console.log("Pinged the deployment and connected to database successfully");
-  } catch (error) {
-    console.error("Failed to connect to database", error);
-  }
-}
 
 run().catch(console.dir);
 
