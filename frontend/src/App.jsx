@@ -14,12 +14,12 @@ import AppContextProvider from "./store/AppContextProvider";
 import User from "./components/user/User";
 import Courses from "./components/courses/Courses";
 import Professors from "./components/professors/Professors";
+import Students from "./components/students/Students"; // Add this line
 
 function App() {
   const theme = createTheme(THEME);
   const queryClient = new QueryClient();
 
-  // TODO: add fallback routing
   return (
     <AppContextProvider>
       <MantineProvider theme={theme}>
@@ -31,6 +31,8 @@ function App() {
                 <Route element={<Professors />} index={true}></Route>
                 <Route path="professors" element={<Professors />} />
                 <Route path="courses" element={<Courses />} />
+                <Route path="students" element={<Students />} />{" "}
+                {/* Add this route */}
               </Route>
             </Routes>
           </ToastContextProvider>

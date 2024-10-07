@@ -11,6 +11,7 @@ const ROUTES = [
     label: "Courses",
     name: "courses",
   },
+  { label: "Students", name: "students" },
 ];
 
 const THEME = {
