@@ -2,17 +2,11 @@ import { Flex, Card, Image, Text, ActionIcon, Box } from "@mantine/core";
 import { IconPencil, IconTrashXFilled } from "@tabler/icons-react";
 
 // Importing the images
-import profAzizImage from "../../assets/prof_aziz_fellah.png";
-import profAjayImage from "../../assets/prof_ajay_bandi.png";
-import profCindyImage from "../../assets/prof_cindytu.png";
-import profRatanImage from "../../assets/prof_ratan_lal.png";
+import courseImage from "../../assets/PatternsAndFrameWorks.jpg";
 
 // Mapping professor names/IDs to their respective images
 const imageMapping = {
-  "Aziz Fellah": profAzizImage,
-  "Ajay Bandi": profAjayImage,
-  "Cindy Zhiling Tu": profCindyImage,
-  "Ratan Lal": profRatanImage,
+  "Patterns and frameworks": courseImage,
 };
 
 const Cards = ({
@@ -37,7 +31,7 @@ const Cards = ({
           <Card.Section>
             {/* Fetch the image based on professor name or ID */}
             <Image
-              src={imageMapping[`${c.course_name}`] || profAzizImage} // Default to Aziz Fellah's image if no match
+              src={imageMapping[`${c.course_name}`] || courseImage}
               height={160}
               alt={c.course_name}
               radius={"md"}
