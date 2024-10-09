@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
 import './register.css'; // Import the CSS file
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-function Registerp() {
-  const [activeTab, setActiveTab] = useState('tab2');
+function Register() {
+    const navigate = useNavigate();
+//   const [activeTab, setActiveTab] = useState('tab2');
 
-  const handleTabClick = (value) => {
-    setActiveTab(value);
-  };
-  const navigate = useNavigate();
-  const handleLoginClick = () => {
-    navigate('/');
+//   const handleTabClick = (value) => {
+//     setActiveTab(value);
+//   };
+const handleloginfunction = (values) => {
+    navigate(`/`);
   };
 
   return (
     <div className="container">
-      
-
       <div className="content">
-       
-
-        {activeTab === 'tab2' && (
+      <h2>Welcome to QR Attendance System</h2>
           <div className="register">
             <h2>Sign up with:</h2>
             <div className="social-icons">
@@ -39,14 +35,14 @@ function Registerp() {
                 <input type="checkbox" /> I have read and agree to the terms
               </label>
             </div>
-            <button className="btn">Sign up</button>
-            <p>Already have an Account</p>
-            <button  className="btn" onClick={handleLoginClick}>Login</button>
+            <h4>Already have Account</h4>
+            <button className="btn" onClick={handleloginfunction}>Login</button>
+
           </div>
-        )}
+        
       </div>
     </div>
   );
 }
 
-export default Registerp;
+export default Register;
