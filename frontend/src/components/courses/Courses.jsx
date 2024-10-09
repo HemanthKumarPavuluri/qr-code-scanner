@@ -73,9 +73,9 @@ const Courses = () => {
         {/* Cards Section */}
         <ScrollArea h={"800"} w="40%" type="never">
           <Cards
-            items={courses} // Assuming Cards can handle courses
-            selectedItem={selectedCourse}
-            handleItemClick={handleCourseClick} // Renamed for generic use
+            courses={courses} // Assuming Cards can handle courses
+            selectedCourse={selectedCourse}
+            handleCourseClick={handleCourseClick} // Renamed for generic use
             handleDelete={handleDelete}
             openEditForm={openEditForm} // Pass openEditForm to Cards
           />

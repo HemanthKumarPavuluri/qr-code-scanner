@@ -24,42 +24,40 @@ const Cards = ({
 }) => {
   return (
     <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl">
-      {courses.map((p) => (
+      {courses.map((c) => (
         <Card
-          key={p.professor_id}
+          key={c._id}
           shadow="lg"
           p="lg"
           radius="md"
           withBorder
           style={{ width: "250px", cursor: "pointer" }}
-          onClick={() => handleCourseClick(p)}
+          onClick={() => handleCourseClick(c)}
         >
           <Card.Section>
             {/* Fetch the image based on professor name or ID */}
             <Image
-              src={
-                imageMapping[`${p.first_name} ${p.last_name}`] || profAzizImage
-              } // Default to Aziz Fellah's image if no match
+              src={imageMapping[`${c.course_name}`] || profAzizImage} // Default to Aziz Fellah's image if no match
               height={160}
-              alt={`${p.first_name} ${p.last_name}`}
+              alt={c.course_name}
               radius={"md"}
             />
           </Card.Section>
           <Text weight={500} size="lg" mt="md">
-            {p.first_name + " " + p.last_name}
+            {c.course_name}
           </Text>
           <Text size="sm" mt="xs">
-            {p.email}
+            {c.crn}
           </Text>
 
-          {selectedCourse?._id === p._id && (
+          {selectedCourse?._id === c._id && (
             <Flex justify={"flex-end"} pt={16} gap={20}>
               {/* Edit Button */}
               <ActionIcon
                 variant="subtle"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent the card click event
-                  openEditForm(p); // Open the form with professor data
+                  openEditForm(c); // Open the form with professor data
                 }}
               >
                 <IconPencil />
@@ -69,14 +67,14 @@ const Cards = ({
               <ActionIcon
                 variant="subtle"
                 color={"red"}
-                onClick={(e) => handleDelete(e, p._id)}
+                onClick={(e) => handleDelete(e, c._id)}
               >
                 <IconTrashXFilled />
               </ActionIcon>
             </Flex>
           )}
 
-          {selectedCourse?._id !== p._id && (
+          {selectedCourse?._id !== c._id && (
             <Box h={45}></Box> // Placeholder for spacing
           )}
         </Card>
