@@ -5,16 +5,17 @@ import Routes from "../routes/Routes";
 import { useNavigate } from "react-router-dom";
 import "./user.css";
 import { useStore } from "../../store/useStore";
+import { ROLES } from "../../shared/constants";
 
 const User = () => {
   const [closed, setOpened] = useState(false);
   const navigate = useNavigate();
-  const { setRoute } = useStore();
+  const { setRoute, role } = useStore();
 
   useEffect(() => {
-    navigate("/user/professors");
-    setRoute("/user/professors");
-  }, []);
+    if (role === ROLES.ADMIN) navigate(`/admin/professors`);
+    setRoute(`/admin/professors`);
+  }, [role]);
 
   return (
     <AppShell

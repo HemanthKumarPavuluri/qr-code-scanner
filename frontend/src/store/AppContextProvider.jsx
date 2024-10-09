@@ -28,7 +28,14 @@ const AppContextProvider = ({ children }) => {
     });
   };
 
-  const store = { ...state, setModule, setRoute, setClient };
+  const setRole = (role) => {
+    dispatch({
+      type: "SET_ROLE",
+      payload: role,
+    });
+  };
+
+  const store = { ...state, setModule, setRoute, setClient, setRole };
 
   return <AppContext.Provider value={store}>{children}</AppContext.Provider>;
 };

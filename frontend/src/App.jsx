@@ -7,7 +7,7 @@ import { Login } from "./components";
 import { MantineProvider, createTheme } from "@mantine/core";
 import "@mantine/dates/styles.css";
 import "mantine-react-table/styles.css";
-import { THEME } from "./shared/constants";
+import { THEME, ROLES } from "./shared/constants";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContextProvider } from "./shared/components";
 import AppContextProvider from "./store/AppContextProvider";
@@ -27,12 +27,19 @@ function App() {
           <ToastContextProvider>
             <Routes>
               <Route path="/" element={<Login />} />
-              <Route path="/user" element={<User />}>
+              <Route path={`/${ROLES.ADMIN}`} element={<User />}>
                 <Route element={<Professors />} index={true}></Route>
                 <Route path="professors" element={<Professors />} />
                 <Route path="courses" element={<Courses />} />
                 <Route path="students" element={<Students />} />{" "}
-                {/* Add this route */}
+              </Route>
+              <Route path={`/${ROLES.PROFESSOR}`} element={<User />}>
+                <Route element={<></>} index={true}></Route>
+                <Route path="home" element={<></>} />
+              </Route>
+              <Route path={`/${ROLES.STUDENT}`} element={<User />}>
+                <Route element={<></>} index={true}></Route>
+                <Route path="home" element={<></>} />
               </Route>
             </Routes>
           </ToastContextProvider>

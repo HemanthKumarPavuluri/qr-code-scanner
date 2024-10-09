@@ -11,7 +11,10 @@ const ROUTES = [
     label: "Courses",
     name: "courses",
   },
-  { label: "Students", name: "students" },
+  {
+    label: "Students",
+    name: "students",
+  },
 ];
 
 const THEME = {
@@ -46,4 +49,10 @@ const DEFAULT_TABLE_CONFIG = {
   enableStickyHeader: true,
 };
 
-export { ROUTES, THEME, DOMAIN, DEFAULT_TABLE_CONFIG };
+const ROLES = {
+  ADMIN: "admin",
+  PROFESSOR: "professor",
+  STUDENT: "student",
+};
+
+export { ROUTES, THEME, DOMAIN, DEFAULT_TABLE_CONFIG, ROLES };

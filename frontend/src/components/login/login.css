@@ -1,7 +1,8 @@
 .login-page {
+  padding: 0 15rem !important;
+
   .mantine-InputWrapper-root {
     label {
-      color: white;
       z-index: 1;
       position: relative;
     }

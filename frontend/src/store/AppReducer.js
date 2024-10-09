@@ -15,6 +15,11 @@ export const AppReducer = (state, action) => {
         ...state,
         client: action.payload,
       };
+    case "SET_ROLE":
+      return {
+        ...state,
+        role: action.payload,
+      };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }

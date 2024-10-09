@@ -6,18 +6,20 @@ import { useStore } from "../../store/useStore";
 
 const Routes = () => {
   const navigate = useNavigate();
-  const { selectedRoute, setRoute } = useStore();
+  const { selectedRoute, setRoute, role } = useStore();
 
   const handleMenuItemClick = (route) => {
-    setRoute(`/user/${route}`);
-    navigate(`/user/${route}`);
+    setRoute(`/${role}/${route}`);
+    navigate(`/${role}/${route}`);
   };
 
   const items = ROUTES.map((child) => (
     <>
       <Box className="routes" py={4}>
         <Button
-          className={`/user/${child.name}` == selectedRoute ? "highlight" : ""}
+          className={
+            `/${role}/${child.name}` == selectedRoute ? "highlight" : ""
+          }
           fullWidth
           justify="start"
           key={child.name}
