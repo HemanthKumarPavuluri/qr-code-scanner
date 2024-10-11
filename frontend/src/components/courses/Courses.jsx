@@ -40,7 +40,7 @@ const Courses = () => {
 
   const handleDelete = async (e, id) => {
     e.stopPropagation();
-    await deleteCourse(id); // Assuming deleteCourse API exists
+    await deleteCourse(id);
     console.log("Successfully deleted the course");
     fetchCourses().then((res) => {
       setCourses(res);

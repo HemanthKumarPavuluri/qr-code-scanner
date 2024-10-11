@@ -10,6 +10,22 @@ const port = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
+// using multer
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'frontend/src/assets')
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + '-' + file.originalname)
+//   }
+// })
+
+// const upload = multer({ storage: storage })
+
+
+// app.post("/single", upload.single(), (req,res) =>{
+//   console.log(req.file)
+// })
 // MongoDB Connection
 const client = new MongoClient(process.env.ATLAS_URI, {
   serverApi: {

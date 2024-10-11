@@ -10,6 +10,7 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
   const [description, setDescription] = useState("");
   const [semester, setSemester] = useState("");
   const [department, setDepartment] = useState("");
+  const [courseLevel, setCourseLevel] = useState([]);
   const [professor, setProfessor] = useState(""); // For assigning professor
   const [prerequisites, setPrerequisites] = useState(""); // Comma-separated string
 
@@ -20,6 +21,7 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
       setCredits(course.credits || "");
       setDescription(course.description || "");
       setSemester(course.semester || "");
+      setCourseLevel(course.degree_levels_available);
       setDepartment(course.department || "");
       setProfessor(course.professor || "");
       setPrerequisites(
@@ -84,6 +86,7 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
       description: description,
       semester: semester,
       department: department,
+      degree_levels_available: courseLevel,
       professor: professor,
       prerequisites: prerequisites.split(",").map((item) => item.trim()),
     };
@@ -111,6 +114,11 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
             value={courseCode}
             onChange={(e) => setCourseCode(e.target.value)}
             required
+          />
+          <TextInput
+            label="Course Level"
+            value={courseLevel}
+            onChange={(e) => setCourseLevel(e.target.value)}
           />
           <TextInput
             label="Credits"
