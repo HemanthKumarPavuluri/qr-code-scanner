@@ -1,32 +1,76 @@
-import React from "react";
-import { Card, Text, Badge, Group } from "@mantine/core";
+import { Flex, Card, Text, ActionIcon, Box } from "@mantine/core";
+import { IconPencil, IconTrashXFilled } from "@tabler/icons-react";
 
-const StudentCard = ({ student }) => {
+const Cards = ({
+  students = [], // Array of student objects
+  handleStudentClick,
+  selectedStudent,
+  handleDelete,
+  openEditForm, // New prop to open the form with pre-filled details
+}) => {
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Group position="apart" mt="md" mb="xs">
-        <Text weight={500}>
-          {student.first_name} {student.last_name}
-        </Text>
-        <Badge color="proven" variant="light">
-          {student.student_id}
-        </Badge>
-      </Group>
+    <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl">
+      {students.map((student) => (
+        <Card
+          key={student._id.$oid}
+          shadow="lg"
+          p="lg"
+          radius="md"
+          withBorder
+          style={{ width: "300px", cursor: "pointer" }}
+          onClick={() => handleStudentClick(student)}
+        >
+          <Text weight={500} size="lg" mt="md">
+            {student.first_name} {student.last_name}
+          </Text>
+          <Text size="sm" mt="xs">
+            Student ID: {student.student_id}
+          </Text>
 
-      <Text size="sm" color="dimmed">
-        Courses Enrolled:
-      </Text>
+          {/* Display the courses enrolled */}
+          <Text weight={500} size="sm" mt="md">
+            Courses Enrolled:
+          </Text>
+          {student.courses_enrolled.map((course, index) => (
+            <Box key={index} mt="xs">
+              <Text size="sm">Course ID: {course.course_id}</Text>
+              <Text size="sm">Section: {course.section_number}</Text>
+              <Text size="sm">Professor: {course.professor_assigned}</Text>
+              <Text size="sm">Level: {course.level}</Text>
+            </Box>
+          ))}
 
-      {student.courses_enrolled.map((course, index) => (
-        <div key={index} style={{ marginTop: "0.5rem" }}>
-          <Text weight={500}>{course.course_id}</Text>
-          <Text size="xs">Section: {course.section_number}</Text>
-          <Text size="xs">Professor: {course.professor_assigned}</Text>
-          <Text size="xs">Level: {course.level}</Text>
-        </div>
+          {selectedStudent?._id.$oid === student._id.$oid && (
+            <Flex justify={"flex-end"} pt={16} gap={20}>
+              {/* Edit Button */}
+              <ActionIcon
+                variant="subtle"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent the card click event
+                  openEditForm(student); // Open the form with student data
+                }}
+              >
+                <IconPencil />
+              </ActionIcon>
+
+              {/* Delete Button */}
+              <ActionIcon
+                variant="subtle"
+                color={"red"}
+                onClick={(e) => handleDelete(e, student._id.$oid)}
+              >
+                <IconTrashXFilled />
+              </ActionIcon>
+            </Flex>
+          )}
+
+          {selectedStudent?._id.$oid !== student._id.$oid && (
+            <Box h={45}></Box> // Placeholder for spacing
+          )}
+        </Card>
       ))}
-    </Card>
+    </Flex>
   );
 };
 
-export default StudentCard;
+export default Cards;

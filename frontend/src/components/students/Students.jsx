@@ -1,57 +1,113 @@
-import React from "react";
-import { SimpleGrid, Container, Title } from "@mantine/core";
-import StudentDetails from "./StudentDetails";
-
-// Mock student data
-const studentsData = [
-  {
-    _id: "67030dfae2fe51d8e192af5e",
-    student_id: "919234567",
-    first_name: "Bhargavi",
-    last_name: "Tatineni",
-    courses_enrolled: [
-      {
-        course_id: "66fa0068ab8a99117dc87b3c",
-        section_number: "001",
-        professor_assigned: "Dr. Aziz Fellah",
-        level: "Undergraduate",
-      },
-    ],
-  },
-  {
-    _id: "67030dfae2fe51d8e192af5d",
-    student_id: "918765432",
-    first_name: "Ravi",
-    last_name: "Kumar",
-    courses_enrolled: [
-      {
-        course_id: "78fa0068ab8a99117dc87a2c",
-        section_number: "002",
-        professor_assigned: "Dr. Sarah Connor",
-        level: "Undergraduate",
-      },
-    ],
-  },
-  // Add more students if needed
-];
+import { useState, useEffect } from "react";
+import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
+import Cards from "./Cards";
+import StudentDetails from "./StudentDetails"; // Component for displaying student details
+import StudentForm from "./StudentForm"; // Form for adding/editing students
+import { fetchStudent, deleteStudent } from "../../api/studentsApi"; // API functions for students
 
 const Students = () => {
-  return (
-    <Container>
-      <Title order={2} mb="lg">
-        Students List
-      </Title>
+  const [students, setStudents] = useState([]); // State for students
+  const [selectedStudent, setSelectedStudent] = useState(undefined); // State for selected student
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [formOpen, setFormOpen] = useState(false); // State for modal open/close
+  const [formStudent, setFormStudent] = useState(null); // State for prefilled student details
 
-      <SimpleGrid
-        cols={2}
-        spacing="lg"
-        breakpoints={[{ maxWidth: "sm", cols: 1 }]}
+  // Fetch students data when the component loads
+  useEffect(() => {
+    fetchStudent()
+      .then((res) => {
+        setStudents(res);
+        if (res.length > 0) {
+          setSelectedStudent(res[0]);
+        }
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError("Failed to fetch students. Please try again later.");
+        setLoading(false);
+      });
+  }, []);
+
+  // Handle student selection
+  const handleStudentClick = (student) => {
+    setSelectedStudent(student);
+  };
+
+  // Function to open the form with prefilled details for editing
+  const openEditForm = (student) => {
+    setFormOpen(true);
+    setFormStudent(student); // Prefill form with selected student data
+  };
+
+  // Handle deleting a student
+  const handleDelete = async (e, id) => {
+    e.stopPropagation();
+    await deleteStudent(id);
+    console.log("Successfully deleted the student");
+    fetchStudents().then((res) => {
+      setStudents(res);
+      if (res.length > 0) {
+        setSelectedStudent(res[0]);
+      }
+    });
+  };
+
+  // Handle opening the form for adding a new student
+  const handleFormOpen = () => {
+    setFormOpen(true);
+    setFormStudent(null); // Reset for adding a new student
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
+  return (
+    <Box>
+      <Flex justify={"space-between"}>
+        <Box>
+          <Title order={2}>Students</Title>
+          <Title order={5}>Select a student to view details</Title>
+        </Box>
+        <Button size="lg" m={16} onClick={() => handleFormOpen()}>
+          Add Student
+        </Button>
+      </Flex>
+      <Flex justify="center" gap={80} py={32}>
+        {/* Cards Section */}
+        <ScrollArea h={"800"} w="40%" type="never">
+          <Cards
+            students={students} // Passing students data to StudentCards
+            selectedStudent={selectedStudent}
+            handleStudentClick={handleStudentClick} // Handle student selection
+            handleDelete={handleDelete} // Handle student deletion
+            openEditForm={openEditForm} // Open form for editing
+          />
+        </ScrollArea>
+
+        {/* Details Section */}
+        <ScrollArea h={"800"} w="40%" type="never">
+          {selectedStudent ? (
+            <StudentDetails data={selectedStudent} />
+          ) : (
+            <p>Select a student to view details</p>
+          )}
+        </ScrollArea>
+      </Flex>
+
+      {/* Modal for adding/editing a student */}
+      <Modal
+        opened={formOpen}
+        onClose={() => setFormOpen(false)}
+        title={formStudent ? "Edit Student" : "Add Student"}
       >
-        {studentsData.map((student) => (
-          <StudentDetails key={student._id} student={student} />
-        ))}
-      </SimpleGrid>
-    </Container>
+        <StudentForm
+          student={formStudent} // Pass the student to the form for editing
+          setStudents={setStudents} // Update students list after form submission
+          setFormOpen={setFormOpen} // Close form after submission
+        />
+      </Modal>
+    </Box>
   );
 };
 

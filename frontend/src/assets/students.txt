@@ -1,0 +1,384 @@
+[{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af5e"
+  },
+  "student_id": "919234567",
+  "first_name": "Bhargavi",
+  "last_name": "Tatineni",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af5f"
+  },
+  "student_id": "919345678",
+  "first_name": "Bhavya",
+  "last_name": "Tatavarthi",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af60"
+  },
+  "student_id": "919456789",
+  "first_name": "Chiranjeevi",
+  "last_name": "Ankaiah",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af61"
+  },
+  "student_id": "919567890",
+  "first_name": "Deepthi",
+  "last_name": "Mekala",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af62"
+  },
+  "student_id": "919678901",
+  "first_name": "Hemanth Kumar",
+  "last_name": "P",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af63"
+  },
+  "student_id": "919789012",
+  "first_name": "Lakshmipriya",
+  "last_name": "Valluri",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af64"
+  },
+  "student_id": "919890123",
+  "first_name": "Leela Krishna",
+  "last_name": "Andhe",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af65"
+  },
+  "student_id": "919901234",
+  "first_name": "Manideep",
+  "last_name": "Gattineni",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af66"
+  },
+  "student_id": "919012345",
+  "first_name": "Nanne Hussain",
+  "last_name": "Shaik",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af67"
+  },
+  "student_id": "919123457",
+  "first_name": "Nikhila",
+  "last_name": "Mateti",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af68"
+  },
+  "student_id": "919234568",
+  "first_name": "Pinakapaani",
+  "last_name": "Basina",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af69"
+  },
+  "student_id": "919345679",
+  "first_name": "Pranathi Reddy",
+  "last_name": "Jeedipalli",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af6a"
+  },
+  "student_id": "919456780",
+  "first_name": "Prem Rakesh",
+  "last_name": "Alasakani",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af6b"
+  },
+  "student_id": "919567891",
+  "first_name": "Ram Niteesh Reddy",
+  "last_name": "Bandi",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af6c"
+  },
+  "student_id": "919678902",
+  "first_name": "Sai Krishna Reddy",
+  "last_name": "Seelam",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af6d"
+  },
+  "student_id": "919789013",
+  "first_name": "Sai Ram Reddy",
+  "last_name": "Muthyala",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af6e"
+  },
+  "student_id": "919890124",
+  "first_name": "Sai Sahithi",
+  "last_name": "Daka",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af6f"
+  },
+  "student_id": "919901235",
+  "first_name": "Sai Venkata Naga Jayaujwal",
+  "last_name": "Vura",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af70"
+  },
+  "student_id": "919012346",
+  "first_name": "Sairakesh",
+  "last_name": "Gajavalli",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af71"
+  },
+  "student_id": "919123458",
+  "first_name": "Sony",
+  "last_name": "Movva",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af72"
+  },
+  "student_id": "919234569",
+  "first_name": "Sowmya",
+  "last_name": "Majeti",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af73"
+  },
+  "student_id": "919345680",
+  "first_name": "Sravanthi",
+  "last_name": "Kasu",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af74"
+  },
+  "student_id": "919456781",
+  "first_name": "Sravya",
+  "last_name": "Chittoor",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "67030dfae2fe51d8e192af75"
+  },
+  "student_id": "919567892",
+  "first_name": "Srinath",
+  "last_name": "Cheduboyina",
+  "courses_enrolled": [
+    {
+      "course_id": "66fa0068ab8a99117dc87b3c",
+      "section_number": "001",
+      "professor_assigned": "Dr. Aziz Fellah",
+      "level": "Undergraduate"
+    }
+  ]
+}]

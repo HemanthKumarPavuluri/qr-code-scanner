@@ -22,7 +22,6 @@ app.use(express.json());
 
 // const upload = multer({ storage: storage })
 
-
 // app.post("/single", upload.single(), (req,res) =>{
 //   console.log(req.file)
 // })
@@ -36,6 +35,8 @@ const client = new MongoClient(process.env.ATLAS_URI, {
 });
 
 let profCollection; // Define collection variables outside to be accessible globally
+let courseCollection;
+let studentCollection;
 
 async function run() {
   try {
@@ -46,7 +47,7 @@ async function run() {
     const database = client.db("qrcode");
     profCollection = database.collection("Professor");
     courseCollection = database.collection("courses");
-
+    studentCollection = database.collection("students");
     console.log("Pinged the deployment and connected to database successfully");
   } catch (error) {
     console.error("Failed to connect to database", error);
@@ -116,7 +117,7 @@ app.delete("/professors/:id", async (req, res) => {
 
 // courses Routes start here
 
-let courseCollection; // Define collection variable for courses
+// Define collection variable for courses
 
 run().catch(console.dir);
 
@@ -177,6 +178,70 @@ app.delete("/courses/:id", async (req, res) => {
     res.send({ message: "Successfully deleted the course" });
   } catch (error) {
     res.status(500).send({ message: "Error deleting course", error });
+  }
+});
+
+// Route to get all students
+app.get("/students", async (req, res) => {
+  try {
+    const results = await studentCollection.find({}).toArray(); // Fetch all students
+    res.status(200).send(results);
+  } catch (error) {
+    res.status(500).send({ message: "Error fetching students", error });
+  }
+});
+
+// Route to add a new student
+app.post("/students", async (req, res) => {
+  try {
+    const newStudent = req.body; // Get data from request body
+    const result = await studentCollection.insertOne(newStudent); // Insert new student into the collection
+    res.status(201).send(result); // Respond with the inserted document
+  } catch (error) {
+    res.status(500).send({ message: "Error inserting student", error });
+  }
+});
+
+// Route to update an existing student
+app.put("/students/:id", async (req, res) => {
+  try {
+    const studentId = req.params.id;
+    const updatedStudent = req.body;
+
+    delete updatedStudent._id; // Remove _id from the update payload
+
+    // Update student based on _id
+    const result = await studentCollection.updateOne(
+      { _id: new ObjectId(studentId) },
+      { $set: updatedStudent }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).send({ message: "Student not found" });
+    }
+
+    res.send({ message: "Student updated successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Error updating student", error });
+  }
+});
+
+// Route to delete a student
+app.delete("/students/:id", async (req, res) => {
+  try {
+    const studentId = req.params.id;
+
+    const result = await studentCollection.deleteOne({
+      _id: new ObjectId(studentId),
+    });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).send({ message: "Student not found" });
+    }
+
+    res.send({ message: "Successfully deleted the student" });
+  } catch (error) {
+    res.status(500).send({ message: "Error deleting student", error });
   }
 });
 

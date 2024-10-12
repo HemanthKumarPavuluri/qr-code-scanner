@@ -1,31 +1,39 @@
-import React from "react";
-import { Card, Text, Badge, Group } from "@mantine/core";
+import { Title, Text, List, Stack } from "@mantine/core";
 
-const StudentDetails = ({ student }) => {
+const StudentDetails = ({ data = {} }) => {
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder>
-      <Group position="apart" mt="md" mb="xs">
-        <Text weight={500}>
-          {student.first_name} {student.last_name}
-        </Text>
-        <Badge color="proven" variant="light">
-          Student ID: {student.student_id}
-        </Badge>
-      </Group>
+    <Stack spacing="md">
+      {/* Display Student's Name */}
+      <Title order={1}>
+        {data.first_name} {data.last_name}
+      </Title>
 
-      <Text size="sm" color="dimmed" mt="md">
-        <b>Courses Enrolled:</b>
+      {/* Student ID */}
+      <Text>
+        <strong>Student ID:</strong> {data.student_id}
       </Text>
 
-      {student.courses_enrolled.map((course, index) => (
-        <div key={index} style={{ marginTop: "0.5rem" }}>
-          <Text weight={500}>Course ID: {course.course_id}</Text>
-          <Text size="xs">Section Number: {course.section_number}</Text>
-          <Text size="xs">Professor Assigned: {course.professor_assigned}</Text>
-          <Text size="xs">Level: {course.level}</Text>
-        </div>
-      ))}
-    </Card>
+      {/* Display List of Courses Enrolled */}
+      <Title order={3}>Courses Enrolled</Title>
+      <List spacing="sm">
+        {data.courses_enrolled?.map((course, index) => (
+          <List.Item key={index}>
+            <Text>
+              <strong>Course ID:</strong> {course.course_id}
+            </Text>
+            <Text>
+              <strong>Section Number:</strong> {course.section_number}
+            </Text>
+            <Text>
+              <strong>Professor Assigned:</strong> {course.professor_assigned}
+            </Text>
+            <Text>
+              <strong>Level:</strong> {course.level}
+            </Text>
+          </List.Item>
+        ))}
+      </List>
+    </Stack>
   );
 };
 
