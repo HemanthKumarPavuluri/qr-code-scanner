@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import { TextInput, Button, Box, Title, Flex } from "@mantine/core";
-import { addProfessor, fetchProfessors,updateProfessor } from "../../api/professorApi"; // Import the addProfessor function
+import { addProfessor, fetchProfessors } from "../../api/professorApi"; // Import the addProfessor function
 
 import { showNotification } from "@mantine/notifications";
 
-const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
+const ProfessorForm = ({
+  professor,
+  setProfessors,
+  setFormOpen,
+  onCancel,
+  handleUpdateProfessor,
+}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -13,7 +19,6 @@ const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
   const [qualification, setQualification] = useState("");
   const [designation, setDesignation] = useState("");
   const [education, setEducation] = useState(""); // Comma-separated string
-  const [coursesTaught, setCoursesTaught] = useState(""); // Comma-separated string
   const [academicInterests, setAcademicInterests] = useState(""); // Comma-separated string
 
   useEffect(() => {
@@ -36,9 +41,6 @@ const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
               .join(", ")
           : ""
       );
-      setCoursesTaught(
-        professor.courses_taught ? professor.courses_taught.join(", ") : ""
-      );
       setAcademicInterests(
         professor.academic_interests
           ? professor.academic_interests.join(", ")
@@ -54,7 +56,6 @@ const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
       setQualification("");
       setDesignation("");
       setEducation("");
-      setCoursesTaught("");
       setAcademicInterests("");
     }
   }, [professor]);
@@ -71,23 +72,6 @@ const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
       console.error("Error adding professor:", error);
       showNotification({
         title: "Error adding professor",
-        message: error.message || "Something went wrong!",
-        color: "red",
-      });
-    }
-  };
-
-  const handleUpdateProfessor = async (updatedProfessor) => {
-    try {
-      await updateProfessor(updatedProfessor);
-      fetchProfessors().then((res) => {
-        setProfessors(res);
-        setFormOpen(false);
-      });
-    } catch (error) {
-      console.error("Error updating professor:", error);
-      showNotification({
-        title: "Error updating professor",
         message: error.message || "Something went wrong!",
         color: "red",
       });
@@ -120,7 +104,6 @@ const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
           year,
         };
       }),
-      courses_taught: coursesTaught.split(",").map((item) => item.trim()),
       academic_interests: academicInterests
         .split(",")
         .map((item) => item.trim()),
@@ -185,11 +168,6 @@ const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
             label="Education (e.g., PhD in Computer Science from University of Example (2015), MSc in Information Technology from Tech University (2010))"
             value={education}
             onChange={(e) => setEducation(e.target.value)}
-          />
-          <TextInput
-            label="Courses Taught (comma separated)"
-            value={coursesTaught}
-            onChange={(e) => setCoursesTaught(e.target.value)}
           />
           <TextInput
             label="Academic Interests (comma separated)"

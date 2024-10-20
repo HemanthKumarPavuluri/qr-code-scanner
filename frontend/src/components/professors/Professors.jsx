@@ -4,6 +4,10 @@ import Cards from "./Cards";
 import CardDetails from "./ProfessorDetails";
 import ProfessorForm from "./ProfessorForm"; // Import the form
 import { fetchProfessors, deleteProfessor } from "../../api/professorApi/index";
+import SelectCourseModal from "./SelectCourseModal";
+import { updateProfessor } from "../../api/professorApi";
+import { fetchCourses } from "../../api/coursesApi";
+import { showNotification } from "@mantine/notifications";
 
 const Professors = () => {
   const [professors, setProfessors] = useState([]);
@@ -12,8 +16,15 @@ const Professors = () => {
   const [error, setError] = useState(null);
   const [formOpen, setFormOpen] = useState(false); // State for modal open/close
   const [formProfessor, setFormProfessor] = useState(null); // State for prefilled professor
+  const [openAsignCourseModal, setOpenAsignCourseModal] = useState(false);
+  const [courses, setCourses] = useState([]);
 
   useEffect(() => {
+    getProfessors();
+    getCourses();
+  }, []);
+
+  const getProfessors = () => {
     fetchProfessors()
       .then((res) => {
         setProfessors(res);
@@ -26,7 +37,18 @@ const Professors = () => {
         setError("Failed to fetch professors. Please try again later.");
         setLoading(false);
       });
-  }, []);
+  };
+
+  const getCourses = () => {
+    fetchCourses()
+      .then((res) => {
+        setCourses(res);
+      })
+      .catch((err) => {
+        setError("Failed to fetch courses. Please try again later.");
+        setLoading(false);
+      });
+  };
 
   const handleProfessorClick = (professor) => {
     setSelectedProfessor(professor);
@@ -36,6 +58,30 @@ const Professors = () => {
   const openEditForm = (professor) => {
     setFormOpen(true);
     setFormProfessor(professor); // Prefill form with selected professor data
+  };
+
+  const handleUpdateProfessor = async (updatedProfessor) => {
+    try {
+      await updateProfessor(updatedProfessor);
+      fetchProfessors().then((res) => {
+        setProfessors(res);
+        setSelectedProfessor(res[0]);
+        setFormOpen(false);
+        setOpenAsignCourseModal(false);
+        showNotification({
+          title: "Update professor",
+          message: "Professor updated successfully",
+          color: "green",
+        });
+      });
+    } catch (error) {
+      console.error("Error updating professor:", error);
+      showNotification({
+        title: "Error updating professor",
+        message: error.message || "Something went wrong!",
+        color: "red",
+      });
+    }
   };
 
   const handleDelete = async (e, id) => {
@@ -82,9 +128,14 @@ const Professors = () => {
         </ScrollArea>
 
         {/* Details Section */}
-        <ScrollArea h={"800"} w="40%" type="never">
+        <ScrollArea h={"800"} w={"40%"} type="never">
           {selectedProfessor ? (
-            <CardDetails data={selectedProfessor} />
+            <CardDetails
+              data={selectedProfessor}
+              courses={courses}
+              openAsignCourseModal={openAsignCourseModal}
+              setOpenAsignCourseModal={setOpenAsignCourseModal}
+            />
           ) : (
             <p>Select a professor to view details</p>
           )}
@@ -100,9 +151,18 @@ const Professors = () => {
         <ProfessorForm
           professor={formProfessor}
           setProfessors={setProfessors}
+          setSelectedProfessor={setSelectedProfessor}
           setFormOpen={setFormOpen}
+          handleUpdateProfessor={handleUpdateProfessor}
         />
       </Modal>
+      <SelectCourseModal
+        open={openAsignCourseModal}
+        setOpen={setOpenAsignCourseModal}
+        handleUpdateProfessor={handleUpdateProfessor}
+        professor={selectedProfessor}
+        courses={courses}
+      />
     </Box>
   );
 };
