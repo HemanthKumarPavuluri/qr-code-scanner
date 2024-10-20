@@ -1,12 +1,20 @@
 import { Button, Box } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import "./routes.css";
+import { useEffect } from "react";
 import { ROUTES } from "../../shared/constants";
 import { useStore } from "../../store/useStore";
 
 const Routes = () => {
   const navigate = useNavigate();
-  const { selectedRoute, setRoute, role } = useStore();
+  const { selectedRoute, setRoute, role, setRole } = useStore();
+
+  useEffect(() => {
+    if (location?.pathname && setRoute) {
+      setRoute(location.pathname);
+      setRole(location.pathname.split("/")?.[1]);
+    }
+  }, [location?.pathname]);
 
   const handleMenuItemClick = (route) => {
     setRoute(`/${role}/${route}`);
