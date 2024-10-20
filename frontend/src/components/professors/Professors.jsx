@@ -65,7 +65,7 @@ const Professors = () => {
       await updateProfessor(updatedProfessor);
       fetchProfessors().then((res) => {
         setProfessors(res);
-        setSelectedProfessor(res[0]);
+        setSelectedProfessor({ ...updatedProfessor });
         setFormOpen(false);
         setOpenAsignCourseModal(false);
         showNotification({
@@ -146,6 +146,7 @@ const Professors = () => {
       <Modal
         opened={formOpen}
         onClose={() => setFormOpen(false)}
+        size={"xl"}
         title={formProfessor ? "Edit Professor" : "Add Professor"}
       >
         <ProfessorForm

@@ -3,7 +3,13 @@ import { TextInput, Button, Box, Title, Flex } from "@mantine/core";
 import { addCourse, fetchCourses, updateCourse } from "../../api/coursesApi"; // API functions for courses
 import { showNotification } from "@mantine/notifications";
 
-const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
+const CourseForm = ({
+  course,
+  setCourses,
+  setFormOpen,
+  onCancel,
+  handleUpdateCourse,
+}) => {
   const [courseName, setCourseName] = useState("");
   const [courseCode, setCourseCode] = useState("");
   const [credits, setCredits] = useState("");
@@ -11,7 +17,6 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
   const [semester, setSemester] = useState("");
   const [department, setDepartment] = useState("");
   const [courseLevel, setCourseLevel] = useState([]);
-  const [professor, setProfessor] = useState(""); // For assigning professor
   const [prerequisites, setPrerequisites] = useState(""); // Comma-separated string
 
   useEffect(() => {
@@ -23,7 +28,6 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
       setSemester(course.semester || "");
       setCourseLevel(course.degree_levels_available);
       setDepartment(course.department || "");
-      setProfessor(course.professor || "");
       setPrerequisites(
         course.prerequisites ? course.prerequisites.join(", ") : ""
       );
@@ -35,7 +39,6 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
       setDescription("");
       setSemester("");
       setDepartment("");
-      setProfessor("");
       setPrerequisites("");
     }
   }, [course]);
@@ -58,23 +61,6 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
     }
   };
 
-  const handleUpdateCourse = async (updatedCourse) => {
-    try {
-      await updateCourse(updatedCourse);
-      fetchCourses().then((res) => {
-        setCourses(res);
-        setFormOpen(false);
-      });
-    } catch (error) {
-      console.error("Error updating course:", error);
-      showNotification({
-        title: "Error updating course",
-        message: error.message || "Something went wrong!",
-        color: "red",
-      });
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -87,7 +73,6 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
       semester: semester,
       department: department,
       degree_levels_available: courseLevel,
-      professor: professor,
       prerequisites: prerequisites.split(",").map((item) => item.trim()),
     };
 
@@ -140,11 +125,6 @@ const CourseForm = ({ course, setCourses, setFormOpen, onCancel }) => {
             label="Department"
             value={department}
             onChange={(e) => setDepartment(e.target.value)}
-          />
-          <TextInput
-            label="Professor"
-            value={professor}
-            onChange={(e) => setProfessor(e.target.value)}
           />
           <TextInput
             label="Prerequisites (comma separated)"

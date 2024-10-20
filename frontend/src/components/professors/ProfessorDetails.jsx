@@ -7,7 +7,7 @@ const CardDetails = ({
   setOpenAsignCourseModal,
 }) => {
   const getCourses = () => {
-    const cours = courses.filter((c) => data.courses.includes(c._id));
+    const cours = courses.filter((c) => data.courses?.includes(c._id));
     return cours.map((c) => c.course_name);
   };
 

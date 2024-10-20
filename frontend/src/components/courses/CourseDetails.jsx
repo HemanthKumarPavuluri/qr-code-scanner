@@ -1,6 +1,16 @@
-import { Title, Text, List, Stack } from "@mantine/core";
+import { Title, Text, List, Stack, Button } from "@mantine/core";
 
-const CourseDetails = ({ data = {} }) => {
+const CourseDetails = ({
+  data = {},
+  openAsignProfessorModal,
+  setOpenAsignProfessorModal,
+  professors = [],
+}) => {
+  const getProfessorName = () => {
+    const prof = professors.filter((p) => p._id === data.professor);
+    return prof[0] ? prof[0].first_name + " " + prof[0].last_name : "";
+  };
+
   return (
     <Stack spacing="md">
       <Title order={1}>{data.course_name}</Title>
@@ -18,15 +28,25 @@ const CourseDetails = ({ data = {} }) => {
         ))}
       </List>
 
+      <Title order={3}>Professor Asigned</Title>
+      {data.professor && (
+        <List spacing="sm">
+          <List.Item>{getProfessorName()}</List.Item>
+        </List>
+      )}
+      <Button
+        variant="outline"
+        onClick={() => setOpenAsignProfessorModal(!openAsignProfessorModal)}
+      >
+        Assign Professor
+      </Button>
+
       <Title order={3}>Sections</Title>
       <List spacing="sm">
         {data.sections.map((section, index) => (
           <List.Item key={index}>
             <Text>
               <strong>Section Number:</strong> {section.section_number}
-            </Text>
-            <Text>
-              <strong>Professor Assigned:</strong> {section.professor_assigned}
             </Text>
             <Text>
               <strong>Level:</strong> {section.level}
