@@ -9,6 +9,7 @@ const imageMapping = {
   "Patterns and frameworks": courseImage,
 };
 
+
 const Cards = ({
   courses = [],
   handleCourseClick,
