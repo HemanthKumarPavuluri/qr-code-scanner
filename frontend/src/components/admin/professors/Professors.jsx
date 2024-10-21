@@ -3,10 +3,10 @@ import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
 import Cards from "./Cards";
 import CardDetails from "./ProfessorDetails";
 import ProfessorForm from "./ProfessorForm"; // Import the form
-import { fetchProfessors, deleteProfessor } from "../../api/professorApi/index";
+import { fetchProfessors, deleteProfessor } from "../../../api/professorApi";
 import SelectCourseModal from "./SelectCourseModal";
-import { updateProfessor } from "../../api/professorApi";
-import { fetchCourses } from "../../api/coursesApi";
+import { updateProfessor } from "../../../api/professorApi";
+import { fetchCourses } from "../../../api/coursesApi";
 import { showNotification } from "@mantine/notifications";
 
 const Professors = () => {

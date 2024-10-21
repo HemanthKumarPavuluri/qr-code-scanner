@@ -12,9 +12,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContextProvider } from "./shared/components";
 import AppContextProvider from "./store/AppContextProvider";
 import User from "./components/user/User";
-import Courses from "./components/courses/Courses";
-import Professors from "./components/professors/Professors";
-import Students from "./components/students/Students"; // Add this line
+import Courses from "./components/admin/courses/Courses";
+import Professors from "./components/admin/professors/Professors";
+import Students from "./components/admin/students/Students"; // Add this line
 
 function App() {
   const theme = createTheme(THEME);

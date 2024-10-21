@@ -3,10 +3,10 @@ import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
 import Cards from "./Cards"; // Assuming Cards component can handle course cards as well
 import CourseDetails from "./CourseDetails"; // Changed to CourseDetails
 import CourseForm from "./CourseForm"; // Import the form for adding/editing courses
-import { fetchCourses, deleteCourse } from "../../api/coursesApi/index"; // Assuming similar API functions for courses
+import { fetchCourses, deleteCourse } from "../../../api/coursesApi/index"; // Assuming similar API functions for courses
 import SelectProfessorModal from "./SelectProfessorModal";
-import { updateCourse } from "../../api/coursesApi";
-import { fetchProfessors } from "../../api/professorApi";
+import { updateCourse } from "../../../api/coursesApi";
+import { fetchProfessors } from "../../../api/professorApi";
 import { showNotification } from "@mantine/notifications";
 
 const Courses = () => {

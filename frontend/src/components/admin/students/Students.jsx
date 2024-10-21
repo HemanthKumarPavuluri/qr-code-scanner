@@ -3,7 +3,7 @@ import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
 import Cards from "./Cards";
 import StudentDetails from "./StudentDetails"; // Component for displaying student details
 import StudentForm from "./StudentForm"; // Form for adding/editing students
-import { fetchStudent, deleteStudent } from "../../api/studentsApi"; // API functions for students
+import { fetchStudent, deleteStudent } from "../../../api/studentsApi"; // API functions for students
 
 const Students = () => {
   const [students, setStudents] = useState([]); // State for students

@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import { TextInput, Button, Box, Title, Flex } from "@mantine/core";
-import { addStudent, fetchStudent, updateStudent } from "../../api/studentsApi"; // API functions for students
+import {
+  addStudent,
+  fetchStudent,
+  updateStudent,
+} from "../../../api/studentsApi"; // API functions for students
 import { showNotification } from "@mantine/notifications";
 
 const StudentForm = ({ student, setStudents, setFormOpen, onCancel }) => {

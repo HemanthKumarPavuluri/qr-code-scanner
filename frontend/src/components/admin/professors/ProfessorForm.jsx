@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TextInput, Button, Box, Title, Flex } from "@mantine/core";
-import { addProfessor, fetchProfessors } from "../../api/professorApi"; // Import the addProfessor function
+import { addProfessor, fetchProfessors } from "../../../api/professorApi"; // Import the addProfessor function
 
 import { showNotification } from "@mantine/notifications";
 

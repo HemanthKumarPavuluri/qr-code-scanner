@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TextInput, Button, Box, Title, Flex } from "@mantine/core";
-import { addCourse, fetchCourses, updateCourse } from "../../api/coursesApi"; // API functions for courses
+import { addCourse, fetchCourses, updateCourse } from "../../../api/coursesApi"; // API functions for courses
 import { showNotification } from "@mantine/notifications";
 
 const CourseForm = ({
