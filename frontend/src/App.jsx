@@ -15,6 +15,7 @@ import User from "./components/user/User";
 import Courses from "./components/admin/courses/Courses";
 import Professors from "./components/admin/professors/Professors";
 import Students from "./components/admin/students/Students"; // Add this line
+import ProfessorDashboard from "./components/professors/ProfessorDetails"; // Import the new component
 
 function App() {
   const theme = createTheme(THEME);
@@ -28,17 +29,18 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path={`/${ROLES.ADMIN}`} element={<User />}>
-                <Route element={<Professors />} index={true}></Route>
+                <Route element={<Professors />} index={true} />
                 <Route path="professors" element={<Professors />} />
                 <Route path="courses" element={<Courses />} />
-                <Route path="students" element={<Students />} />{" "}
+                <Route path="students" element={<Students />} />
               </Route>
               <Route path={`/${ROLES.PROFESSOR}`} element={<User />}>
-                <Route element={<></>} index={true}></Route>
+                <Route path="dashboard" element={<ProfessorDashboard />} /> {/* New route for professor dashboard */}
+                <Route element={<></>} index={true} />
                 <Route path="home" element={<></>} />
               </Route>
               <Route path={`/${ROLES.STUDENT}`} element={<User />}>
-                <Route element={<></>} index={true}></Route>
+                <Route element={<></>} index={true} />
                 <Route path="home" element={<></>} />
               </Route>
             </Routes>
