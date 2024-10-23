@@ -2,7 +2,7 @@ import { Flex, Card, Image, Text, ActionIcon, Box } from "@mantine/core";
 import { IconPencil, IconTrashXFilled } from "@tabler/icons-react";
 
 // Importing the images
-import profAzizImage from "../../../assets/prof_aziz_fellah.png";
+import profAzizImage from "../../../assets/generic_image.png";
 import profAjayImage from "../../../assets/prof_ajay_bandi.png";
 import profCindyImage from "../../../assets/prof_cindytu.png";
 import profRatanImage from "../../../assets/prof_ratan_lal.png";

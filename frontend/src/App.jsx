@@ -39,10 +39,10 @@ function App() {
                 {/* New route for professor dashboard */}
                 <Route element={<ProfessorDashboard />} index={true} />
               </Route>
-              <Route path={`/${ROLES.STUDENT}`} element={<User />}>
+              {/* <Route path={`/${ROLES.STUDENT}`} element={<User />}>
                 <Route element={<></>} index={true} />
                 <Route path="home" element={<></>} />
-              </Route>
+              </Route> */}
             </Routes>
           </ToastContextProvider>
         </QueryClientProvider>

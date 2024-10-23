@@ -59,7 +59,7 @@ const DEFAULT_TABLE_CONFIG = {
 const ROLES = {
   ADMIN: "admin",
   PROFESSOR: "professor",
-  STUDENT: "student",
+  // STUDENT: "student",
 };
 
 export {
