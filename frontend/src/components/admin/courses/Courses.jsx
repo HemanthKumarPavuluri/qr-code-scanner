@@ -8,6 +8,7 @@ import SelectProfessorModal from "./SelectProfessorModal";
 import { updateCourse } from "../../../api/coursesApi";
 import { fetchProfessors } from "../../../api/professorApi";
 import { showNotification } from "@mantine/notifications";
+import updateProfessor from "../../../api/professorApi/updateProfessor";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]); // State for courses
@@ -77,6 +78,10 @@ const Courses = () => {
         color: "red",
       });
     }
+  };
+
+  const handleUpdateProfessor = async (updatedProfessor) => {
+    await updateProfessor(updatedProfessor);
   };
 
   const handleDelete = async (e, id) => {
@@ -156,6 +161,7 @@ const Courses = () => {
         open={openAsignProfessorModal}
         setOpen={setOpenAsignProfessorModal}
         handleUpdateCourse={handleUpdateCourse}
+        handleUpdateProfessor={handleUpdateProfessor}
         course={selectedCourse}
         professors={professors}
       />

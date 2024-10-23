@@ -7,7 +7,7 @@ const ProfessorDetails = ({ data = {} }) => {
         {data.first_name} {data.last_name}
       </Title>
       <Text>
-        <strong>Professor ID:</strong> {data.professor_id}
+        <strong>Professor ID:</strong> {data._id}
       </Text>
       {/* Add additional professor details if needed */}
     </Stack>

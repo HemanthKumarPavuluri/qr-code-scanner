@@ -13,8 +13,14 @@ const User = () => {
   const { setRoute, role } = useStore();
 
   useEffect(() => {
-    if (role === ROLES.ADMIN) navigate(`/admin/professors`);
-    setRoute(`/admin/professors`);
+    if (role === ROLES.ADMIN) {
+      navigate(`/admin/professors`);
+      setRoute(`/admin/professors`);
+    }
+    if (role === ROLES.PROFESSOR) {
+      navigate(`/professor/dashboard`);
+      setRoute(`/professor/dashboard`);
+    }
   }, [role]);
 
   return (

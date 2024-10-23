@@ -1,14 +1,21 @@
 import { Modal, Flex, Select, Button } from "@mantine/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const SelectProfessorModal = ({
   open,
   setOpen,
   handleUpdateCourse,
+  handleUpdateProfessor,
   course,
   professors,
 }) => {
   const [value, setValue] = useState(course.professor);
+  const [addedProfessor, setAddedProfessor] = useState("");
+  const [removedProfessor, setRemovedProfessor] = useState("");
+
+  useEffect(() => {
+    setValue(course.professor);
+  }, [course]);
 
   const getData = () => {
     return professors.map((item) => {
@@ -19,10 +26,33 @@ const SelectProfessorModal = ({
     });
   };
 
+  const handleSetValue = (event) => {
+    setAddedProfessor(event);
+    setRemovedProfessor("");
+    setValue(event);
+  };
+
+  const handleUnAsign = () => {
+    setValue(null);
+  };
+
   const handleAsign = () => {
     const cour = { ...course };
     cour.professor = value;
     handleUpdateCourse(cour);
+
+    const selectedProfessor = addedProfessor
+      ? addedProfessor
+      : removedProfessor;
+    const professor = professors.filter((p) => p._id === selectedProfessor)[0];
+    if (removedProfessor) {
+      professor.courses = professor.courses.filter(
+        (i) => i !== selectedProfessor
+      );
+    } else if (addedProfessor && !professor.courses.includes(addedProfessor)) {
+      professor.courses = [...professor.courses, course._id];
+    }
+    handleUpdateProfessor(professor);
   };
 
   return (
@@ -36,11 +66,15 @@ const SelectProfessorModal = ({
       <Select
         label="Professor"
         placeholder="Pick value"
+        value={value}
         data={getData()}
-        onChange={setValue}
+        onChange={(e) => handleSetValue(e)}
         searchable
       />
-      <Flex justify="flex-end">
+      <Flex justify="flex-end" gap={20}>
+        <Button mt={32} variant={"outline"} onClick={handleUnAsign}>
+          Unasign
+        </Button>
         <Button mt={32} onClick={handleAsign}>
           Save
         </Button>

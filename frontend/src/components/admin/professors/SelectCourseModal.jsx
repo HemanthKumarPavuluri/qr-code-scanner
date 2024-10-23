@@ -1,14 +1,36 @@
 import { Modal, Flex, MultiSelect, Button } from "@mantine/core";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SelectCourseModal = ({
   open,
   setOpen,
   handleUpdateProfessor,
+  handleUpdateCourse,
   professor,
   courses,
 }) => {
   const [value, setValue] = useState(professor.courses);
+  const [addedCourse, setAddedCourse] = useState("");
+  const [removedCourse, setRemovedCourse] = useState("");
+
+  useEffect(() => {
+    setValue(professor.courses);
+  }, [professor]);
+
+  const handleSetCourse = (event) => {
+    const rarr = value.filter((val) => !event.includes(val));
+    const aarr = event.filter((val) => !value.includes(val));
+
+    if (rarr.length) {
+      setRemovedCourse(rarr[0]);
+      setAddedCourse("");
+    }
+    if (aarr.length) {
+      setAddedCourse(aarr[0]);
+      setRemovedCourse("");
+    }
+    setValue(event);
+  };
 
   const getData = () => {
     return courses.map((item) => {
@@ -23,6 +45,15 @@ const SelectCourseModal = ({
     const prof = { ...professor };
     prof.courses = value;
     handleUpdateProfessor(prof);
+
+    const selectedCourse = addedCourse ? addedCourse : removedCourse;
+    const course = courses.filter((c) => c._id === selectedCourse);
+    if (removedCourse) {
+      course[0].professor = "";
+    } else if (addedCourse) {
+      course[0].professor = prof._id;
+    }
+    handleUpdateCourse(course[0]);
   };
 
   return (
@@ -37,7 +68,7 @@ const SelectCourseModal = ({
         label="Select courses"
         data={getData()}
         value={value}
-        onChange={setValue}
+        onChange={(event) => handleSetCourse(event)}
         searchable
       />
       <Flex justify="flex-end">

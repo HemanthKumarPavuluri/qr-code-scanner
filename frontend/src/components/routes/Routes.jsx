@@ -2,7 +2,7 @@ import { Button, Box } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import "./routes.css";
 import { useEffect } from "react";
-import { ROUTES } from "../../shared/constants";
+import { ADMIN_ROUTES, ROLES, PROFESSOR_ROUTES } from "../../shared/constants";
 import { useStore } from "../../store/useStore";
 
 const Routes = () => {
@@ -21,7 +21,12 @@ const Routes = () => {
     navigate(`/${role}/${route}`);
   };
 
-  const items = ROUTES.map((child) => (
+  const getRoutes = () => {
+    if (role === ROLES.ADMIN) return ADMIN_ROUTES;
+    if (role === ROLES.PROFESSOR) return PROFESSOR_ROUTES;
+  };
+
+  const items = getRoutes().map((child) => (
     <>
       <Box className="routes" py={4}>
         <Button

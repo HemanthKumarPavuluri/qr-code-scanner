@@ -2,7 +2,7 @@ import { IconDatabase } from "@tabler/icons-react";
 
 const DOMAIN = "http://13.235.98.215:8001";
 
-const ROUTES = [
+const ADMIN_ROUTES = [
   {
     label: "Professors",
     name: "professors",
@@ -14,6 +14,13 @@ const ROUTES = [
   {
     label: "Students",
     name: "students",
+  },
+];
+
+const PROFESSOR_ROUTES = [
+  {
+    label: "Dashboard",
+    name: "dashboard",
   },
 ];
 
@@ -55,4 +62,11 @@ const ROLES = {
   STUDENT: "student",
 };
 
-export { ROUTES, THEME, DOMAIN, DEFAULT_TABLE_CONFIG, ROLES };
+export {
+  ADMIN_ROUTES,
+  PROFESSOR_ROUTES,
+  THEME,
+  DOMAIN,
+  DEFAULT_TABLE_CONFIG,
+  ROLES,
+};

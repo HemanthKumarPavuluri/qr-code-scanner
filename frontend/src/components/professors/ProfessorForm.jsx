@@ -4,7 +4,7 @@ import {
   addProfessor,
   fetchProfessors,
   updateProfessor,
-} from "../../../api/professorsApi"; // API functions for professors
+} from "../../api/professorApi"; // API functions for professors
 import { showNotification } from "@mantine/notifications";
 
 const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
@@ -86,7 +86,9 @@ const ProfessorForm = ({ professor, setProfessors, setFormOpen, onCancel }) => {
 
   return (
     <Box>
-      <Title order={3}>{professor ? "Edit Professor" : "Add New Professor"}</Title>
+      <Title order={3}>
+        {professor ? "Edit Professor" : "Add New Professor"}
+      </Title>
       <form onSubmit={handleSubmit}>
         <Flex direction="column" gap="md">
           <TextInput

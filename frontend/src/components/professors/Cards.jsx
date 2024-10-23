@@ -1,42 +1,57 @@
-import { Flex, Card, Text, ActionIcon } from "@mantine/core";
+import { Flex, Card, Image, Text, ActionIcon, Box } from "@mantine/core";
 import { IconPencil, IconTrashXFilled } from "@tabler/icons-react";
 
+// Importing the images
+import courseImage from "../../assets/PatternsAndFrameWorks.jpg";
+
+// Mapping professor names/IDs to their respective images
+const imageMapping = {
+  "Patterns and frameworks": courseImage,
+};
+
 const Cards = ({
-  professors = [], // Array of professor objects
-  handleProfessorClick,
-  selectedProfessor,
-  handleDelete,
-  openEditForm,
+  courses = [],
+  handleCourseClick = () => {},
+  selectedCourse = () => {},
+  handleDelete = () => {},
+  openEditForm = () => {}, // New prop to open the form with pre-filled details
 }) => {
   return (
     <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl">
-      {professors.map((professor) => (
+      {courses.map((c) => (
         <Card
-          key={professor._id.$oid}
+          key={c._id}
           shadow="lg"
           p="lg"
           radius="md"
           withBorder
-          style={{ width: "300px", cursor: "pointer" }}
-          onClick={() => handleProfessorClick(professor)}
+          style={{ width: "250px", cursor: "pointer" }}
+          onClick={() => handleCourseClick(c)}
         >
+          <Card.Section>
+            {/* Fetch the image based on professor name or ID */}
+            <Image
+              src={imageMapping[`${c.course_name}`] || courseImage}
+              height={160}
+              alt={c.course_name}
+              radius={"md"}
+            />
+          </Card.Section>
           <Text weight={500} size="lg" mt="md">
-            {professor.first_name} {professor.last_name}
+            {c.course_name}
           </Text>
           <Text size="sm" mt="xs">
-            Professor ID: {professor.professor_id}
+            {c.crn}
           </Text>
 
-          {/* Additional information if necessary */}
-
-          {selectedProfessor?._id.$oid === professor._id.$oid && (
+          {selectedCourse?._id === c._id && (
             <Flex justify={"flex-end"} pt={16} gap={20}>
               {/* Edit Button */}
               <ActionIcon
                 variant="subtle"
                 onClick={(e) => {
-                  e.stopPropagation();
-                  openEditForm(professor);
+                  e.stopPropagation(); // Prevent the card click event
+                  openEditForm(c); // Open the form with professor data
                 }}
               >
                 <IconPencil />
@@ -46,11 +61,15 @@ const Cards = ({
               <ActionIcon
                 variant="subtle"
                 color={"red"}
-                onClick={(e) => handleDelete(e, professor._id.$oid)}
+                onClick={(e) => handleDelete(e, c._id)}
               >
                 <IconTrashXFilled />
               </ActionIcon>
             </Flex>
+          )}
+
+          {selectedCourse?._id !== c._id && (
+            <Box h={45}></Box> // Placeholder for spacing
           )}
         </Card>
       ))}

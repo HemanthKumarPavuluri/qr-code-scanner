@@ -6,7 +6,7 @@ import ProfessorForm from "./ProfessorForm"; // Import the form
 import { fetchProfessors, deleteProfessor } from "../../../api/professorApi";
 import SelectCourseModal from "./SelectCourseModal";
 import { updateProfessor } from "../../../api/professorApi";
-import { fetchCourses } from "../../../api/coursesApi";
+import { fetchCourses, updateCourse } from "../../../api/coursesApi";
 import { showNotification } from "@mantine/notifications";
 
 const Professors = () => {
@@ -84,6 +84,10 @@ const Professors = () => {
     }
   };
 
+  const handleUpdateCourse = async (updatedCourse) => {
+    await updateCourse(updatedCourse);
+  };
+
   const handleDelete = async (e, id) => {
     e.stopPropagation();
     await deleteProfessor(id);
@@ -157,10 +161,12 @@ const Professors = () => {
           handleUpdateProfessor={handleUpdateProfessor}
         />
       </Modal>
+
       <SelectCourseModal
         open={openAsignCourseModal}
         setOpen={setOpenAsignCourseModal}
         handleUpdateProfessor={handleUpdateProfessor}
+        handleUpdateCourse={handleUpdateCourse}
         professor={selectedProfessor}
         courses={courses}
       />

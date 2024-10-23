@@ -5,6 +5,7 @@ export const initialState = {
   selectedRoute: "",
   client: "",
   role: "",
+  professorID: "670029e074d70a21375d31cb",
 };
 
 export const AppContext = createContext(initialState);
