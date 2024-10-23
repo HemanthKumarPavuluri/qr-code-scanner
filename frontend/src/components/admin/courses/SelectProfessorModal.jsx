@@ -9,7 +9,7 @@ const SelectProfessorModal = ({
   course,
   professors,
 }) => {
-  const [value, setValue] = useState(course.professor);
+  const [value, setValue] = useState(course?.professor || {});
   const [addedProfessor, setAddedProfessor] = useState("");
   const [removedProfessor, setRemovedProfessor] = useState("");
 

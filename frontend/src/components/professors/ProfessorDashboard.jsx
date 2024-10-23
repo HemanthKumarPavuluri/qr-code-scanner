@@ -18,7 +18,7 @@ const ProfessorDashboard = () => {
       const prof = res.filter((i) => i._id === professorID)?.[0];
       setProfessor(prof);
       fetchCourses().then((res) => {
-        const cours = res.filter((c) => prof.courses.includes(c._id));
+        const cours = res.filter((c) => prof.courses?.includes(c._id));
         setCourses(cours);
       });
     });

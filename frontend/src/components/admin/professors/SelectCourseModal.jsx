@@ -6,10 +6,10 @@ const SelectCourseModal = ({
   setOpen,
   handleUpdateProfessor,
   handleUpdateCourse,
-  professor,
+  professor = {},
   courses,
 }) => {
-  const [value, setValue] = useState(professor.courses);
+  const [value, setValue] = useState(professor?.courses || []);
   const [addedCourse, setAddedCourse] = useState("");
   const [removedCourse, setRemovedCourse] = useState("");
 
