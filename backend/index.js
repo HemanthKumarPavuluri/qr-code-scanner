@@ -2,6 +2,7 @@ const express = require("express");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const cors = require("cors");
 require("dotenv").config({ path: "./config.env" });
+const jwt = require("jsonwebtoken");
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -9,6 +10,44 @@ const port = process.env.PORT || 3001;
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// middleware for admin and professor
+const verifyAdmin = async (req, res, next) => {
+  const email = req.decoded.email;
+  const query = { email: email };
+  const user = await userCollection.findOne(query);
+  if (user.role === "admin") {
+    next();
+  } else {
+    return res.status(401).send({ message: "Unauthorised access" });
+  }
+};
+
+const verifyProfessor = async (req, res, next) => {
+  const email = req.decoded.email;
+  const query = { email: email };
+  const user = await userCollection.findOne(query);
+  if (user.role === "professor") {
+    next();
+  } else {
+    return res.status(401).send({ message: "Unauthorised access" });
+  }
+};
+// verify jwt token
+const verifyJWT = (req, res, next) => {
+  const authorization = req.headers.authorization;
+  if (!authorization) {
+    return res.status(401).send({ message: "Autherization Denied" });
+  }
+  const token = authorization.split(" ")[1];
+  jwt.verify(token, process.env.ACCESS_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "Forbidden access" });
+    }
+    req.decoded = decoded;
+    next();
+  });
+};
 
 // using multer
 // const storage = multer.diskStorage({
@@ -37,6 +76,7 @@ const client = new MongoClient(process.env.ATLAS_URI, {
 let profCollection; // Define collection variables outside to be accessible globally
 let courseCollection;
 let studentCollection;
+let userCollection;
 
 async function run() {
   try {
@@ -48,6 +88,7 @@ async function run() {
     profCollection = database.collection("Professor");
     courseCollection = database.collection("courses");
     studentCollection = database.collection("students");
+    userCollection = database.collection("users");
     console.log("Pinged the deployment and connected to database successfully");
   } catch (error) {
     console.error("Failed to connect to database", error);
@@ -55,6 +96,65 @@ async function run() {
 }
 
 run().catch(console.dir);
+
+//Routes for users
+
+app.post("/api/set-token", (req, res) => {
+  const user = req.body;
+  const token = jwt.sign(user, process.env.ACCESS_SECRET, {
+    expiresIn: "24h",
+  });
+  res.send(token);
+});
+
+app.post("/new-user", async (req, res) => {
+  const newuser = re.body;
+  const result = await userCollection.insertOne(newuser);
+  res.send(result);
+});
+
+app.get("/users", async (req, res) => {
+  const result = await userCollection.find({}).toArray();
+  res.send(result);
+});
+
+app.get("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const query = { _id: new ObjectId(id) };
+  const result = await userCollection.findOne(query);
+  res.send(result);
+});
+
+app.get("/user/:email", async (req, res) => {
+  const email = req.params.email;
+  const query = { email: email };
+  const result = await userCollection.findOne(query);
+  res.send(result);
+});
+
+app.delete("/delete-user/:id", async (req, res) => {
+  const id = re.params.id;
+  const query = { _id: new ObjectId(id) };
+  const result = await userCollection.deleteOne(query);
+  res.send(result);
+});
+
+app.put("update-user/:id", async (req, res) => {
+  const id = req.params.id;
+  const updatedUser = req.body;
+  const filter = { _id: new ObjectId(id) };
+  const options = { upsert: true };
+  const updateOne = {
+    $set: {
+      name: updatedUser.name,
+      email: updatedUser.email,
+      role: updatedUser.role,
+      empId: updatedUser.empId,
+    },
+  };
+  const result = userCollection.updateOne(filter, updateDoc, options);
+  res.send(result);
+});
 
 // Route to get all professors
 app.get("/professors", async (req, res) => {
