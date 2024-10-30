@@ -4,7 +4,7 @@ import { IconPencil, IconTrashXFilled } from "@tabler/icons-react";
 // Importing the images
 import courseImage from "../../../assets/PatternsAndFrameWorks.jpg";
 
-// Mapping professor names/IDs to their respective images
+// Mapping professor names/IDs to their respective images based on the names
 const imageMapping = {
   "Patterns and frameworks": courseImage,
 };
@@ -18,7 +18,7 @@ const Cards = ({
   openEditForm, // New prop to open the form with pre-filled details
 }) => {
   return (
-    <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl">
+    <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl"> 
       {courses.map((c) => (
         <Card
           key={c._id}
@@ -30,7 +30,7 @@ const Cards = ({
           onClick={() => handleCourseClick(c)}
         >
           <Card.Section>
-            {/* Fetch the image based on professor name or ID */}
+            {/* Fetch the image based on professor name or ID that it was given */}
             <Image
               src={imageMapping[`${c.course_name}`] || courseImage}
               height={160}
