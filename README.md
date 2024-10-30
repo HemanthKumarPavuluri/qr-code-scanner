@@ -43,4 +43,4 @@ The Backend folder contains server-side code that handles API requests and datab
 **User Interaction:** The user interacts with the frontend, scanning a QR code.<br>
 **API Request**:The frontend sends a request to the backend API with the scanned QR code data.<br>
 **Database Operations:** The backend handles this request, saves the data to MongoDB, and may send back a response, like confirmation or a record of the scanned code.<br>
-**Display Results:** The frontend processes the response from the backend and displays the appropriate information (e.g., the decoded data from the QR code).
+**Display Results:** The frontend processes the response from the backend and display the appropriate information (e.g., the decoded data from the QR code).
