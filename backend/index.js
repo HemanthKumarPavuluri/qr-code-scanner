@@ -22,7 +22,7 @@ const verifyAdmin = async (req, res, next) => {
     return res.status(401).send({ message: "Unauthorised access" });
   }
 };
-
+// verifying the professor
 const verifyProfessor = async (req, res, next) => {
   const email = req.decoded.email;
   const query = { email: email };
@@ -33,7 +33,7 @@ const verifyProfessor = async (req, res, next) => {
     return res.status(401).send({ message: "Unauthorised access" });
   }
 };
-// verify jwt token
+// verifying the jwt token for authorization
 // If user credentials are valid then server will process the request
 const verifyJWT = (req, res, next) => {
   const authorization = req.headers.authorization;
