@@ -1,6 +1,7 @@
 import { Modal, Flex, Select, Button } from "@mantine/core";
 import { useState, useEffect } from "react";
 
+//Here we fetch the professor
 const SelectProfessorModal = ({
   open,
   setOpen,
