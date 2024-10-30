@@ -21,6 +21,17 @@
 **API Integration**:The frontend communicates with the backend through API endpoints (for instance, to send scanned QR code data to the server).<br>
 **State Management:** You can use hooks like useState, useEffect or a state management library like Redux to handle the app’s global state.<br>
 
+__________________________
+**Setup Instructions:** <br>
+Open Terminal <br>
+Navigate to the frontend directory. >> cd frontend <br>
+**Install dependencies:** npm install<br>
+**Start the development server:** npm run dev<br>
+The app will be available at http://localhost:3000.
+__________________________
+
+
+
 **2. Backend**<br>
 The Backend folder contains server-side code that handles API requests and database operations. It uses Node.js with Express for handling the server logic and MongoDB as the database for storing and retrieving scanned QR code data.<br>
 
@@ -38,6 +49,16 @@ The Backend folder contains server-side code that handles API requests and datab
 **MongoDB Integration:** Data such as scanned QR codes and user information (if needed) are stored in the MongoDB database.<br>
 **Environment Variables**:Sensitive information, like the MongoDB connection string, is kept in the .env file to ensure security.<br>
 **Data Validation:** Uses validation libraries like Joi or custom validation to ensure the integrity of the data sent by the frontend.<br>
+
+____________________________
+**Setup Instructions:** <br>
+Open Another Terminal <br>
+Navigate to the backend directory. >> cd backend <br>
+**Install dependencies:** npm install<br>
+**Start the file:** node index.js<br>
+The app will be connected to MONGODB.<br>
+index.js is the file that has connection setup to mangodb.
+_____________________________
 
 **Workflow**:<br>
 **User Interaction:** The user interacts with the frontend, scanning a QR code.<br>
