@@ -14,7 +14,7 @@ const SelectCourseModal = ({
   const [removedCourse, setRemovedCourse] = useState("");
 
   useEffect(() => {
-    setValue(professor.courses);
+    setValue(professor.courses || []);
   }, [professor]);
 
   const handleSetCourse = (event) => {
