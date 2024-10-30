@@ -34,6 +34,7 @@ const verifyProfessor = async (req, res, next) => {
   }
 };
 // verify jwt token
+// If user credentials are valid then server will process the request
 const verifyJWT = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (!authorization) {
@@ -200,7 +201,7 @@ app.put("/professors/:id", async (req, res) => {
     res.status(500).send({ message: "Error updating professor", error });
   }
 });
-
+// route to delete 
 app.delete("/professors/:id", async (req, res) => {
   try {
     const profId = req.params.id;
