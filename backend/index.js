@@ -22,7 +22,7 @@ const verifyAdmin = async (req, res, next) => {
     return res.status(401).send({ message: "Unauthorised access" });
   }
 };
-// verifying the professor
+// verifying the professor based on the name that we clicked
 const verifyProfessor = async (req, res, next) => {
   const email = req.decoded.email;
   const query = { email: email };
