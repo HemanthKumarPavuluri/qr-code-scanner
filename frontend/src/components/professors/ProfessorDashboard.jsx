@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { Flex, Box, Button } from "@mantine/core"; // Import Button here
-import Cards from "./Cards";
-import ProfessorDetails from "./ProfessorDetails";
-import ProfessorForm from "./ProfessorForm";
-import { fetchProfessors, deleteProfessor } from "../../api/professorApi";
-import { fetchCourses } from "../../api/coursesApi";
+import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
+import Cards from "./Cards"; // A component similar to Students' Cards
+import ProfessorDetails from "./ProfessorDetails"; // Component for displaying professor details
+import ProfessorForm from "./ProfessorForm"; // Form for adding/editing professors
+import { fetchProfessors, deleteProfessor } from "../../api/professorApi"; // API functions for professors
+import { fetchCourses } from "../../api/coursesApi"; // API functions for professors
 import { useStore } from "../../store/useStore";
 
 const ProfessorDashboard = () => {
@@ -22,23 +22,26 @@ const ProfessorDashboard = () => {
         setCourses(cours);
       });
     });
-  }, []);
+  }, [professorID]);
 
   return (
-    <Box>
+    <>
       <ProfessorDetails data={professor} />
-      
-      {/* Add the "Students" button here */}
+
+      {/* Button to redirect to Students page */}
       <Flex justify="flex-end" mt="md">
         <Button
-          onClick={() => window.open("https://course-dashboard-jglh.onrender.com/display.html", "_blank")}
+          component="a"
+          href="https://course-dashboard-jglh.onrender.com/display.html"
+          target="_blank" // Open in a new tab
+          variant="outline"
         >
           Students
         </Button>
       </Flex>
 
       <Cards courses={courses} />
-    </Box>
+    </>
   );
 };
 

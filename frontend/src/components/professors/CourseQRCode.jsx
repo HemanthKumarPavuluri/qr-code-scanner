@@ -8,7 +8,7 @@ const CourseQRCode = ({ open, setOpen, course }) => {
     <Modal
       opened={open}
       onClose={() => setOpen(false)}
-      title="Scan the QR code to enroll the course"
+      title="Scan the QR code for attendance"
       size={"xl"}
       closeOnClickOutside={false}
     >
