@@ -1,8 +1,10 @@
-const express = require("express");
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
-const cors = require("cors");
-require("dotenv").config({ path: "./config.env" });
-const jwt = require("jsonwebtoken");
+import express from "express";
+import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
+import cors from "cors";
+import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+
+dotenv.config({ path: "./config.env" });
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -10,6 +12,22 @@ const port = process.env.PORT || 3001;
 //below is for Middleware
 app.use(cors());
 app.use(express.json());
+
+
+
+app.post("/login", async (req, res) => {
+  const { userId, password } = req.body;
+  const user = await userCollection.findOne({ userId });
+
+  if (user && user.password === password) {
+    const token = jwt.sign({ email: user.email, role: user.role }, process.env.ACCESS_SECRET, {
+      expiresIn: "10d",
+    });
+    res.send({ token, role: user.role });
+  } else {
+    res.status(401).send({ message: "Invalid credentials" });
+  }
+});
 
 // middleware for admin and professor
 const verifyAdmin = async (req, res, next) => {
