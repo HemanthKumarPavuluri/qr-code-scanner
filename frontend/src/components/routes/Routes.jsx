@@ -17,7 +17,10 @@ const Routes = () => {
   useEffect(() => {
     if (location?.pathname && setRoute) {
       setRoute(location.pathname);
-      setRole(location.pathname.split("/")?.[1]);
+      const pathnameRole = location.pathname.split("/")?.[1];
+      if (Object.values(ROLES).includes(pathnameRole)) {
+        setRole(pathnameRole);
+      }
     }
   }, [location?.pathname]);
 
@@ -30,25 +33,23 @@ const Routes = () => {
     if (role === ROLES.ADMIN) return ADMIN_ROUTES;
     if (role === ROLES.PROFESSOR) return PROFESSOR_ROUTES;
     if (role === ROLES.STUDENT) return STUDENT_ROUTES;
+    return []; // Fallback to prevent undefined
   };
 
   const items = getRoutes().map((child) => (
-    <>
-      <Box className="routes" py={4}>
-        <Button
-          className={
-            `/${role}/${child.name}` == selectedRoute ? "highlight" : ""
-          }
-          fullWidth
-          justify="start"
-          key={child.name}
-          variant="subtle"
-          onClick={() => handleMenuItemClick(child.name)}
-        >
-          {child.label}
-        </Button>
-      </Box>
-    </>
+    <Box className="routes" py={4} key={child.name}>
+      <Button
+        className={
+          `/${role}/${child.name}` === selectedRoute ? "highlight" : ""
+        }
+        fullWidth
+        justify="start"
+        variant="subtle"
+        onClick={() => handleMenuItemClick(child.name)}
+      >
+        {child.label}
+      </Button>
+    </Box>
   ));
 
   return <>{items}</>;
