@@ -9,10 +9,10 @@ import profRatanImage from "../../../assets/prof_ratan_lal.png";
 
 // Mapping professor names/IDs to their respective images
 const imageMapping = {
-  "Aziz Fellah": profAzizImage,
-  "Ajay Bandi": profAjayImage,
-  "Cindy Zhiling Tu": profCindyImage,
-  "Ratan Lal": profRatanImage,
+  "Azi Fellah": profAzizImage,
+  "Ajy Bandi": profAjayImage,
+  "Ciny Zhiling Tu": profCindyImage,
+  "Ratn Lal": profRatanImage,
 };
 
 const Cards = ({

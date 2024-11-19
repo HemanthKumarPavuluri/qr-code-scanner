@@ -24,6 +24,13 @@ const PROFESSOR_ROUTES = [
   },
 ];
 
+const STUDENT_ROUTES = [
+  {
+    label: "Dashboard",
+    name: "dashboard",
+  },
+];
+
 const THEME = {
   primaryColor: "proven",
   colors: {
@@ -59,7 +66,7 @@ const DEFAULT_TABLE_CONFIG = {
 const ROLES = {
   ADMIN: "admin",
   PROFESSOR: "professor",
-  // STUDENT: "student",
+  STUDENT: "student",
 };
 
 export {
@@ -69,4 +76,5 @@ export {
   DOMAIN,
   DEFAULT_TABLE_CONFIG,
   ROLES,
+  STUDENT_ROUTES,
 };

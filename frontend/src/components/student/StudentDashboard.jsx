@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
-import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
-import Cards from "./Cards"; // A component similar to Students' Cards
-import ProfessorDetails from "./ProfessorDetails"; // Component for displaying professor details
-import ProfessorForm from "./ProfessorForm"; // Form for adding/editing professors
 import { fetchProfessors, deleteProfessor } from "../../api/professorApi"; // API functions for professors
 import { fetchCourses } from "../../api/coursesApi"; // API functions for professors
 import { useStore } from "../../store/useStore";
 
-const ProfessorDashboard = () => {
+const StudentDashboard = () => {
   const { professorID } = useStore();
   const [professor, setProfessor] = useState({});
   const [courses, setCourses] = useState([]);
@@ -26,10 +22,10 @@ const ProfessorDashboard = () => {
 
   return (
     <>
-      <ProfessorDetails data={professor} />
+      {/* <ProfessorDetails data={professor} />
 
       {/* Button to redirect to Students page */}
-      <Flex justify="flex-end" mt="md">
+      {/* <Flex justify="flex-end" mt="md">
         <Button
           component="a"
           href="https://course-dashboard-jglh.onrender.com/display.html"
@@ -38,11 +34,11 @@ const ProfessorDashboard = () => {
         >
           Students
         </Button>
-      </Flex>
+      </Flex> */}
 
-      <Cards courses={courses} />
+      {/* <Cards courses={courses} /> */}
     </>
   );
 };
 
-export default ProfessorDashboard;
+export default StudentDashboard;

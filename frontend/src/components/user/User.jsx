@@ -1,11 +1,10 @@
-import { AppShell, Burger, Flex, Text } from "@mantine/core";
+import { AppShell, Burger, Button, Flex, Text } from "@mantine/core";
 import { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Routes from "../routes/Routes";
-import { useNavigate } from "react-router-dom";
-import "./user.css";
 import { useStore } from "../../store/useStore";
 import { ROLES } from "../../shared/constants";
+import "./user.css";
 
 const User = () => {
   const [closed, setOpened] = useState(false);
@@ -23,6 +22,12 @@ const User = () => {
     }
   }, [role]);
 
+  const handleLogout = () => {
+    // Clear user session or tokens
+    localStorage.removeItem("authToken"); // Example for clearing token
+    navigate("/"); // Redirect to login page
+  };
+
   return (
     <AppShell
       className="user"
@@ -35,9 +40,10 @@ const User = () => {
       padding="md"
       h={"100%"}
     >
-      <AppShell.Header className="header">
-        <Flex>
-          <Flex px="md" w={300} h={60} gap={16} align={"center"}>
+      {/* Header with background color */}
+      <AppShell.Header className="header" style={{ backgroundColor: "#001F3F" }}>
+        <Flex justify="space-between" align="center" px="md" h={60}>
+          <Flex gap={16} align={"center"}>
             <Burger
               opened={closed}
               onClick={() => setOpened(!closed)}
@@ -48,10 +54,25 @@ const User = () => {
               Northwest Missouri
             </Text>
           </Flex>
+          <Button
+            size="sm"
+            style={{
+              backgroundColor: "#e63946", // Button background color
+              color: "white", // Button text color
+            }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
         </Flex>
       </AppShell.Header>
 
-      <AppShell.Navbar p="md" w={300}>
+      {/* Sidebar with background color */}
+      <AppShell.Navbar
+        p="md"
+        w={300}
+        style={{ backgroundColor: "#001F3F", color: "white" }} // Sidebar styling
+      >
         <Routes />
       </AppShell.Navbar>
 

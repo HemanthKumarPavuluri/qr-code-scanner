@@ -9,7 +9,7 @@ dotenv.config({ path: "./config.env" });
 const app = express();
 const port = process.env.PORT || 3001;
 
-// Middleware
+//below is for Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -40,7 +40,7 @@ const verifyAdmin = async (req, res, next) => {
     return res.status(401).send({ message: "Unauthorised access" });
   }
 };
-
+// verifying the professor based on the name that we clicked
 const verifyProfessor = async (req, res, next) => {
   const email = req.decoded.email;
   const query = { email: email };
@@ -51,7 +51,10 @@ const verifyProfessor = async (req, res, next) => {
     return res.status(401).send({ message: "Unauthorised access" });
   }
 };
-// verify jwt token
+// verifying the jwt token for authorization
+// If user credentials are valid then server will generate token and it will send back to the user
+// the generated token will be stored in backend that is mongo DB
+// If the enered credenteials are valid then server will process the request
 const verifyJWT = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (!authorization) {
@@ -218,7 +221,7 @@ app.put("/professors/:id", async (req, res) => {
     res.status(500).send({ message: "Error updating professor", error });
   }
 });
-
+// route to delete 
 app.delete("/professors/:id", async (req, res) => {
   try {
     const profId = req.params.id;
@@ -250,6 +253,7 @@ app.get("/courses", async (req, res) => {
 });
 
 // Route to add a new course
+// here we able to add the course
 app.post("/courses", async (req, res) => {
   try {
     const newCourse = req.body; // Get data from request body
