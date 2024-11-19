@@ -18,6 +18,7 @@ import Professors from "./components/admin/professors/Professors";
 import Students from "./components/admin/students/Students";
 import StudentsPage from "./components/admin/students/StudentsPage"; // Import StudentsPage
 import ProfessorDashboard from "./components/professors/ProfessorDashboard";
+import StudentDashboard from "./components/student/StudentDashboard";
 
 function App() {
   const theme = createTheme(THEME);
@@ -35,11 +36,19 @@ function App() {
                 <Route path="professors" element={<Professors />} />
                 <Route path="courses" element={<Courses />} />
                 <Route path="students" element={<Students />} />
-                <Route path="students/distribution" element={<StudentsPage />} /> {/* Add StudentsPage route */}
+                <Route
+                  path="students/distribution"
+                  element={<StudentsPage />}
+                />{" "}
+                {/* Add StudentsPage route */}
               </Route>
               <Route path={`/${ROLES.PROFESSOR}`} element={<User />}>
                 <Route path="dashboard" element={<ProfessorDashboard />} />
                 <Route element={<ProfessorDashboard />} index={true} />
+              </Route>
+              <Route path={`/${ROLES.STUDENT}`} element={<User />}>
+                <Route path="dashboard" element={<StudentDashboard />} />
+                <Route element={<StudentDashboard />} index={true} />
               </Route>
             </Routes>
           </ToastContextProvider>
