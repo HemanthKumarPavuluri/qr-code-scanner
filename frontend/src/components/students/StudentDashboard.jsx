@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
 
 const StudentDashboard = () => {
   const [courses, setCourses] = useState([]);
+  const [showIframe, setShowIframe] = useState(false);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -16,12 +18,26 @@ const StudentDashboard = () => {
 
   return (
     <div>
-      <h1>Your Courses</h1>
-      <ul>
-        {courses.map((course) => (
-          <li key={course._id}>{course.title}</li>
-        ))}
-      </ul>
+      <h1>Click Here to View Your Attendance :</h1>
+      {!showIframe ? (
+        <Button
+          onClick={() => setShowIframe(true)}
+          variant="gradient"
+          gradient={{ from: "orange", to: "red", deg: 60 }}
+          size="md"
+          radius="xl"
+        >
+          Update Student Records
+        </Button>
+      ) : (
+        <Box mt="md" style={{ height: "600px", border: "1px solid #ddd" }}>
+          <iframe
+            src="https://student-individual-dashboard.onrender.com/"
+            style={{ width: "100%", height: "100%", border: "none" }}
+            title="Student Dashboard"
+          />
+        </Box>
+      )}
     </div>
   );
 };

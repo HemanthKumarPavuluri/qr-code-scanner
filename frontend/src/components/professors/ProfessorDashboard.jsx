@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
+import { Flex, Box, ScrollArea, Title, Button } from "@mantine/core";
 import Cards from "./Cards"; // A component similar to Students' Cards
 import ProfessorDetails from "./ProfessorDetails"; // Component for displaying professor details
-import ProfessorForm from "./ProfessorForm"; // Form for adding/editing professors
 import { fetchProfessors, deleteProfessor } from "../../api/professorApi"; // API functions for professors
 import { fetchCourses } from "../../api/coursesApi"; // API functions for professors
 import { useStore } from "../../store/useStore";
@@ -11,6 +10,7 @@ const ProfessorDashboard = () => {
   const { professorID } = useStore();
   const [professor, setProfessor] = useState({});
   const [courses, setCourses] = useState([]);
+  const [iframeSrc, setIframeSrc] = useState(null); // State for the iframe source
 
   // Fetch professors data when the component loads
   useEffect(() => {
@@ -24,19 +24,16 @@ const ProfessorDashboard = () => {
     });
   }, [professorID]);
 
-
   return (
     <>
       <ProfessorDetails data={professor} />
-  
-      {/* Section Title with Buttons Side-by-Side */}
+
+      {/* Section Title with Buttons */}
       <Flex justify="space-between" align="center" mt="xl" mb="md">
         <Title order={4}>All Teaching Courses</Title>
-        <Flex gap="sm"> {/* Wrapper for side-by-side buttons */}
+        <Flex gap="sm">
           <Button
-            component="a"
-            href="https://professor-student-records.onrender.com/"
-            target="_blank" // Open in a new tab
+            onClick={() => setIframeSrc("https://professor-student-records.onrender.com/")}
             variant="gradient"
             gradient={{ from: "teal", to: "blue", deg: 60 }}
             size="md"
@@ -45,9 +42,7 @@ const ProfessorDashboard = () => {
             View Students Records
           </Button>
           <Button
-            component="a"
-            href="https://course-dashboard-jglh.onrender.com/display.html"
-            target="_blank" // Open in a new tab
+            onClick={() => setIframeSrc("https://course-dashboard-jglh.onrender.com/display.html")}
             variant="gradient"
             gradient={{ from: "orange", to: "red", deg: 60 }}
             size="md"
@@ -57,14 +52,22 @@ const ProfessorDashboard = () => {
           </Button>
         </Flex>
       </Flex>
-  
+
       {/* Teaching Courses Cards */}
       <Cards courses={courses} />
+
+      {/* Embedded iframe */}
+      {iframeSrc && (
+        <Box mt="md" style={{ height: "600px", border: "1px solid #ddd" }}>
+          <iframe
+            src={iframeSrc}
+            style={{ width: "100%", height: "100%", border: "none" }}
+            title="Embedded Content"
+          />
+        </Box>
+      )}
     </>
   );
-
-  
-    
 };
 
 export default ProfessorDashboard;
