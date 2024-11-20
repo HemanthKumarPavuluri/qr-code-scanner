@@ -24,25 +24,47 @@ const ProfessorDashboard = () => {
     });
   }, [professorID]);
 
+
   return (
     <>
       <ProfessorDetails data={professor} />
-
-      {/* Button to redirect to Students page */}
-      <Flex justify="flex-end" mt="md">
-        <Button
-          component="a"
-          href="https://course-dashboard-jglh.onrender.com/display.html"
-          target="_blank" // Open in a new tab
-          variant="outline"
-        >
-          Students
-        </Button>
+  
+      {/* Section Title with Buttons Side-by-Side */}
+      <Flex justify="space-between" align="center" mt="xl" mb="md">
+        <Title order={4}>All Teaching Courses</Title>
+        <Flex gap="sm"> {/* Wrapper for side-by-side buttons */}
+          <Button
+            component="a"
+            href="https://professor-student-records.onrender.com/"
+            target="_blank" // Open in a new tab
+            variant="gradient"
+            gradient={{ from: "teal", to: "blue", deg: 60 }}
+            size="md"
+            radius="xl"
+          >
+            View Students Records
+          </Button>
+          <Button
+            component="a"
+            href="https://course-dashboard-jglh.onrender.com/display.html"
+            target="_blank" // Open in a new tab
+            variant="gradient"
+            gradient={{ from: "orange", to: "red", deg: 60 }}
+            size="md"
+            radius="xl"
+          >
+            Update Student Records
+          </Button>
+        </Flex>
       </Flex>
-
+  
+      {/* Teaching Courses Cards */}
       <Cards courses={courses} />
     </>
   );
+
+  
+    
 };
 
 export default ProfessorDashboard;
