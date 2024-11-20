@@ -1,59 +1,89 @@
 import { useState, useEffect } from "react";
-import { Flex, Box, ScrollArea, Title, Button, Modal } from "@mantine/core";
+import { Flex, Box, ScrollArea, Button, Title, Modal } from "@mantine/core";
 import Cards from "./Cards";
-import StudentDetails from "./StudentDetails"; // Component for displaying student details
-import StudentForm from "./StudentForm"; // Form for adding/editing students
-import { fetchStudent, deleteStudent } from "../../../api/studentsApi"; // API functions for students
+import StudentDetails from "./StudentDetails";
+import StudentForm from "./StudentForm";
+import SelectCourseModal from "./SelectCourseModal";
+
+import {
+  fetchStudent,
+  deleteStudent,
+  assignCourseToStudent,
+} from "../../../api/studentsApi";
+import { fetchCourses } from "../../../api/coursesApi";
 
 const Students = () => {
-  const [students, setStudents] = useState([]); // State for students
-  const [selectedStudent, setSelectedStudent] = useState(undefined); // State for selected student
+  const [students, setStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [formOpen, setFormOpen] = useState(false); // State for modal open/close
-  const [formStudent, setFormStudent] = useState(null); // State for prefilled student details
+  const [formOpen, setFormOpen] = useState(false);
+  const [formStudent, setFormStudent] = useState(null);
+  const [assignCoursesOpen, setAssignCoursesOpen] = useState(false);
+  const [courses, setCourses] = useState([]);
 
-  // Fetch students data when the component loads
   useEffect(() => {
-    fetchStudent()
-      .then((res) => {
-        setStudents(res);
-        if (res.length > 0) {
-          setSelectedStudent(res[0]);
+    const fetchData = async () => {
+      try {
+        const studentsRes = await fetchStudent();
+        const coursesRes = await fetchCourses();
+        setStudents(studentsRes);
+        setCourses(coursesRes);
+        if (studentsRes.length > 0) {
+          setSelectedStudent(studentsRes[0]);
         }
+      } catch (err) {
+        setError("Failed to fetch data. Please try again later.");
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to fetch students. Please try again later.");
-        setLoading(false);
-      });
+      }
+    };
+    fetchData();
   }, []);
 
-  // Handle student selection
   const handleStudentClick = (student) => {
     setSelectedStudent(student);
   };
 
-  // Function to open the form with prefilled details for editing
   const openEditForm = (student) => {
     setFormOpen(true);
-    setFormStudent(student); // Prefill form with selected student data
+    setFormStudent(student);
   };
 
-  // Handle deleting a student
+  const openAssignCourses = (student) => {
+    setSelectedStudent(student);
+    setAssignCoursesOpen(true);
+  };
+
   const handleDelete = async (e, id) => {
     e.stopPropagation();
-    await deleteStudent(id);
-    console.log("Successfully deleted the student");
-    fetchStudents().then((res) => {
-      setStudents(res);
-      if (res.length > 0) {
-        setSelectedStudent(res[0]);
-      }
-    });
+    try {
+      await deleteStudent(id);
+      const updatedStudents = await fetchStudent();
+      setStudents(updatedStudents);
+      setSelectedStudent(
+        updatedStudents.length > 0 ? updatedStudents[0] : null
+      );
+    } catch (err) {
+      console.error("Failed to delete student", err);
+    }
   };
 
-  // Handle opening the form for adding a new student
+  const handleAssignCourses = async (studentId, selectedCourses) => {
+    try {
+      for (let courseId of selectedCourses) {
+        await assignCourseToStudent(studentId, courseId);
+      }
+      const updatedStudents = await fetchStudent();
+      setStudents(updatedStudents);
+      setSelectedStudent(updatedStudents.find((s) => s._id === studentId));
+    } catch (err) {
+      console.error("Failed to assign courses", err);
+    } finally {
+      setAssignCoursesOpen(false); // Ensure modal closes even if an error occurs
+    }
+  };
+
   const handleFormOpen = () => {
     setFormOpen(true);
     setFormStudent(null); // Reset for adding a new student
@@ -64,29 +94,31 @@ const Students = () => {
 
   return (
     <Box>
-      <Flex justify={"space-between"}>
+      <Flex justify="space-between" align="center" mb="md">
         <Box>
           <Title order={2}>Students</Title>
           <Title order={5}>Select a student to view details</Title>
         </Box>
-        <Button size="lg" m={16} onClick={() => handleFormOpen()}>
+        <Button size="lg" onClick={handleFormOpen}>
           Add Student
         </Button>
       </Flex>
+
       <Flex justify="center" gap={80} py={32}>
         {/* Cards Section */}
-        <ScrollArea h={"800"} w="40%" type="never">
+        <ScrollArea h={800} w="40%" type="never">
           <Cards
-            students={students} // Passing students data to StudentCards
-            selectedStudent={selectedStudent}
-            handleStudentClick={handleStudentClick} // Handle student selection
-            handleDelete={handleDelete} // Handle student deletion
-            openEditForm={openEditForm} // Open form for editing
+            students={students}
+            courses={courses} // Pass complete courses array to Cards
+            handleStudentClick={handleStudentClick}
+            handleDelete={handleDelete}
+            openEditForm={openEditForm}
+            openAssignCourses={openAssignCourses}
           />
         </ScrollArea>
 
         {/* Details Section */}
-        <ScrollArea h={"800"} w="40%" type="never">
+        <ScrollArea h={800} w="40%" type="never">
           {selectedStudent ? (
             <StudentDetails data={selectedStudent} />
           ) : (
@@ -102,11 +134,34 @@ const Students = () => {
         title={formStudent ? "Edit Student" : "Add Student"}
       >
         <StudentForm
-          student={formStudent} // Pass the student to the form for editing
-          setStudents={setStudents} // Update students list after form submission
-          setFormOpen={setFormOpen} // Close form after submission
+          student={formStudent}
+          setStudents={setStudents}
+          setFormOpen={setFormOpen}
         />
       </Modal>
+
+      {/* Modal for assigning courses */}
+      {assignCoursesOpen && (
+        <SelectCourseModal
+          open={assignCoursesOpen}
+          setOpen={setAssignCoursesOpen}
+          student={selectedStudent}
+          courses={courses}
+          handleUpdateStudent={(updatedStudent) => {
+            const updatedStudents = students.map((s) =>
+              s._id === updatedStudent._id ? updatedStudent : s
+            );
+            setStudents(updatedStudents);
+            setSelectedStudent(updatedStudent);
+          }}
+          handleUpdateCourse={(updatedCourse) => {
+            const updatedCourses = courses.map((c) =>
+              c._id === updatedCourse._id ? updatedCourse : c
+            );
+            setCourses(updatedCourses);
+          }}
+        />
+      )}
     </Box>
   );
 };

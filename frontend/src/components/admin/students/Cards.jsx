@@ -1,18 +1,25 @@
-import { Flex, Card, Text, ActionIcon, Box } from "@mantine/core";
-import { IconPencil, IconTrashXFilled } from "@tabler/icons-react";
+import React from "react";
+import { Card, Text, Button, Flex } from "@mantine/core";
 
 const Cards = ({
-  students = [], // Array of student objects
+  students = [],
+  courses = [], // Add courses array to map course IDs to titles
   handleStudentClick,
-  selectedStudent,
   handleDelete,
-  openEditForm, // New prop to open the form with pre-filled details
+  openEditForm,
+  openAssignCourses,
 }) => {
+  // Helper function to get course title by ID
+  const getCourseTitle = (courseId) => {
+    const course = courses.find((c) => c._id === courseId);
+    return course ? course.course_name : "Untitled Course";
+  };
+
   return (
     <Flex gap="lg" wrap="wrap" justify="flex-start" mt="xl">
       {students.map((student) => (
         <Card
-          key={student._id.$oid}
+          key={student._id}
           shadow="lg"
           p="lg"
           radius="md"
@@ -20,53 +27,66 @@ const Cards = ({
           style={{ width: "300px", cursor: "pointer" }}
           onClick={() => handleStudentClick(student)}
         >
+          {/* Student Info */}
           <Text weight={500} size="lg" mt="md">
-            {student.first_name} {student.last_name}
+            {student.name}
           </Text>
           <Text size="sm" mt="xs">
             Student ID: {student.student_id}
           </Text>
 
-          {/* Display the courses enrolled */}
+          {/* Assigned Courses */}
           <Text weight={500} size="sm" mt="md">
-            Courses Enrolled:
+            Courses Assigned:
           </Text>
-          {student.courses_enrolled.map((course, index) => (
-            <Box key={index} mt="xs">
-              <Text size="sm">Course ID: {course.course_id}</Text>
-              <Text size="sm">Section: {course.section_number}</Text>
-              <Text size="sm">Professor: {course.professor_assigned}</Text>
-              <Text size="sm">Level: {course.level}</Text>
-            </Box>
-          ))}
-
-          {selectedStudent?._id.$oid === student._id.$oid && (
-            <Flex justify={"flex-end"} pt={16} gap={20}>
-              {/* Edit Button */}
-              <ActionIcon
-                variant="subtle"
-                onClick={(e) => {
-                  e.stopPropagation(); // Prevent the card click event
-                  openEditForm(student); // Open the form with student data
-                }}
-              >
-                <IconPencil />
-              </ActionIcon>
-
-              {/* Delete Button */}
-              <ActionIcon
-                variant="subtle"
-                color={"red"}
-                onClick={(e) => handleDelete(e, student._id.$oid)}
-              >
-                <IconTrashXFilled />
-              </ActionIcon>
-            </Flex>
+          {student.courses?.length > 0 ? (
+            student.courses.map((courseId) => (
+              <Text size="sm" key={courseId} mt="xs">
+                - {getCourseTitle(courseId)}
+              </Text>
+            ))
+          ) : (
+            <Text size="sm" color="dimmed" mt="xs">
+              No courses assigned.
+            </Text>
           )}
 
-          {selectedStudent?._id.$oid !== student._id.$oid && (
-            <Box h={45}></Box> // Placeholder for spacing
-          )}
+          {/* Action Buttons */}
+          <Flex justify="space-between" mt="md">
+            <Button
+              size="xs"
+              variant="outline"
+              color="blue"
+              onClick={(e) => {
+                e.stopPropagation();
+                openEditForm(student);
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              size="xs"
+              variant="light"
+              color="red"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleDelete(e, student._id);
+              }}
+            >
+              Delete
+            </Button>
+            <Button
+              size="xs"
+              variant="light"
+              color="green"
+              onClick={(e) => {
+                e.stopPropagation();
+                openAssignCourses(student);
+              }}
+            >
+              Assign Courses
+            </Button>
+          </Flex>
         </Card>
       ))}
     </Flex>

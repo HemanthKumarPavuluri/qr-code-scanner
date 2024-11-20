@@ -18,7 +18,7 @@ import Professors from "./components/admin/professors/Professors";
 import Students from "./components/admin/students/Students";
 import StudentsPage from "./components/admin/students/StudentsPage"; // Import StudentsPage
 import ProfessorDashboard from "./components/professors/ProfessorDashboard";
-import StudentDashboard from "./components/student/StudentDashboard";
+import StudentDashboard from "./components/students/StudentDashboard";
 
 function App() {
   const theme = createTheme(THEME);
