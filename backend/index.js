@@ -367,6 +367,30 @@ app.delete("/students/:id", async (req, res) => {
   }
 });
 
+// Assign course to student
+app.post("/assign-course-to-student", async (req, res) => {
+  const { studentId, courseId } = req.body;
+
+  try {
+    // Add the course to the student's courses array
+    await studentCollection.updateOne(
+      { _id: new ObjectId(studentId) },
+      { $addToSet: { courses: new ObjectId(courseId) } } // Prevent duplicates
+    );
+
+    // Add the student to the course's enrolled students array
+    await courseCollection.updateOne(
+      { _id: new ObjectId(courseId) },
+      { $addToSet: { studentIds: new ObjectId(studentId) } }
+    );
+
+    res.status(200).send({ message: "Course assigned to student successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Failed to assign course to student", error });
+  }
+});
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
